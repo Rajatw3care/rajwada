@@ -79,51 +79,49 @@ instead of `npm run build` for hot reload.
 - `resources/views/components/forms/*.blade.php` — shared form field components (`input`,
   `textarea`, `file`, `checkbox`, `richtext`) used across all admin CRUD forms.
 
-## Deployment — GitHub webhook auto-deploy
+## Deployment — GitHub Actions → FTP (Host4India)
 
-`public/deploy.php` is a self-contained webhook endpoint: when GitHub delivers a `push` event to
-`main`, it pulls the latest code and rebuilds the app on the server. No CI runner needed — it runs
-directly on the host via a webhook.
+`.github/workflows/deploy.yml` is the deploy mechanism in use: on every push to `main`, GitHub's
+runner builds the app (`composer install`, `npm run build`) and uploads only the built,
+production-ready files to `public_html/rajwada.mars.host4india.in/` over FTP. Nothing executes on
+the shared-hosting server itself, so no SSH or `exec()` access is required there — just an FTP
+account.
 
-**Server prerequisites**
+**One-time setup**
 
-- `git`, `composer`, `node`/`npm` available in the PATH of the user PHP runs as
-- PHP's `exec()`/`shell_exec()` not disabled (`disable_functions` in `php.ini`) — some cheap shared
-  hosts block this; check before relying on this script
-- The deploy user needs write access to the whole project and push access to the git remote
+In the GitHub repo → **Settings → Secrets and variables → Actions**, add:
 
-**Setup**
+| Secret          | Value                                            |
+|------------------|---------------------------------------------------|
+| `FTP_SERVER`      | Host4India FTP hostname (e.g. `ftp.host4india.in` or the server IP) |
+| `FTP_USERNAME`    | FTP account username                              |
+| `FTP_PASSWORD`    | FTP account password                              |
 
-1. On the server, set `DEPLOY_WEBHOOK_SECRET` in `.env` to a long random value (never commit this),
-   and `DEPLOY_BRANCH` if you deploy from a branch other than `main`.
-2. On GitHub: repo → **Settings → Webhooks → Add webhook**
-   - Payload URL: `https://your-domain.com/deploy.php`
-   - Content type: `application/json`
-   - Secret: the same value as `DEPLOY_WEBHOOK_SECRET`
-   - Events: **Just the push event**
-3. Push to `main`. GitHub calls `deploy.php`, which verifies the `X-Hub-Signature-256` HMAC against
-   the secret, checks the ref is `refs/heads/{DEPLOY_BRANCH}`, then runs:
+Then confirm, via cPanel → **Domains**, that `rajwada.mars.host4india.in`'s document root points
+at `public_html/rajwada.mars.host4india.in/public` (Laravel's `public/` folder) — not the app root
+— so the rest of the framework (`app/`, `.env`, etc.) isn't web-accessible.
 
-   ```
-   git fetch --depth=1 origin main
-   git reset --hard origin/main
-   composer install --no-dev --optimize-autoloader
-   php artisan migrate --force
-   php artisan config:cache
-   php artisan route:cache
-   php artisan view:cache
-   npm ci
-   npm run build
-   ```
+**What happens on push to `main`**
 
-Every run is logged to `storage/logs/deploy.log`. A lock file
-(`storage/framework/deploy.lock`) prevents two deploys from overlapping if GitHub redelivers the
-webhook. Requests with a missing/invalid signature return `403` and are logged but never touch the
-working tree; a push to any branch other than `DEPLOY_BRANCH` is acknowledged (`200`) and ignored.
+1. Checkout → PHP 8.2 + Composer (`--no-dev --optimize-autoloader`) → Node 20 + `npm ci && npm run build`
+2. The result is staged into a clean folder, excluding `.git`, `node_modules`, `tests`, `.env`,
+   and anything that's server-owned state: `storage/app/public` (admin-uploaded images),
+   `storage/framework/*`, `storage/logs`, `public/storage` (the symlink), `database/database.sqlite`
+3. That staged folder is FTP-uploaded to `public_html/rajwada.mars.host4india.in/`
 
-**If the server can't run Node** (no `npm`/`node` in PATH — common on shared hosting): drop the
-`npm ci` / `npm run build` steps from `deploy.php` and instead commit the built `public/build/`
-output to the repo, rebuilding it locally before each push.
+**What it deliberately does *not* do:** run `php artisan migrate`, `config:cache`, `route:cache`,
+or `view:cache` on the server — the GitHub runner never sees production's real `.env`, so it can't
+safely generate those. After a deploy that changes the database schema or config, run those
+commands manually via cPanel's **Terminal** app (or SSH, if enabled on the plan).
+
+**If your FTP account is already chrooted into `public_html/`** (some hosts do this), edit the
+`server-dir` line in `deploy.yml` from `./public_html/rajwada.mars.host4india.in/` to
+`./rajwada.mars.host4india.in/`.
+
+`public/deploy.php` (a webhook-triggered self-deploy script) still exists in the repo but is
+**not** the active deploy path — GitHub Actions above is. It's left in place in case a future host
+offers SSH/exec access and a webhook-based deploy becomes preferable; the corresponding GitHub
+webhook was never actually configured, so it does nothing unless someone wires it up.
 
 > The repo's current git remote has a personal access token embedded directly in the URL
 > (`https://user:TOKEN@github.com/...`), which is stored in plaintext in `.git/config`. Worth

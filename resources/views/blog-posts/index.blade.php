@@ -1,69 +1,65 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-common.page-breadcrumb pageTitle="Blogs & Stories" />
+    <div x-data="{
+        modalOpen: false,
+        modalHtml: '',
+        modalLoading: false,
+        openModal(url) {
+            this.modalOpen = true;
+            this.modalLoading = true;
+            this.modalHtml = '';
+            fetch(url + (url.includes('?') ? '&' : '?') + 'modal=1', { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                .then(r => r.text())
+                .then(html => { this.modalHtml = html; this.modalLoading = false; })
+                .catch(() => { this.modalLoading = false; this.modalHtml = '<p class=&quot;p-6 text-red-600&quot;>Failed to load form.</p>'; });
+        }
+    }">
+        <x-common.page-breadcrumb pageTitle="Blogs & Stories" subtitle="Wedding stories featured on the public site" />
 
-    <div class="space-y-6">
-        @session('success')
-            <x-ui.alert variant="success">{{ $value }}</x-ui.alert>
-        @endsession
+        <div class="space-y-6">
+            @session('success')
+                <x-ui.alert variant="success">{{ $value }}</x-ui.alert>
+            @endsession
 
-        <div class="flex justify-end">
-            <a href="{{ route('blog-posts.create') }}" class="bg-brand-500 hover:bg-brand-600 inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-medium text-white">
-                Add Post
-            </a>
-        </div>
-
-        <div class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
-            <div class="max-w-full overflow-x-auto custom-scrollbar">
-                <table class="w-full min-w-[900px]">
-                    <thead>
-                        <tr class="border-b border-gray-100 dark:border-gray-800">
-                            <th class="px-5 py-3 text-left sm:px-6"><p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Image</p></th>
-                            <th class="px-5 py-3 text-left sm:px-6"><p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Title</p></th>
-                            <th class="px-5 py-3 text-left sm:px-6"><p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Venue</p></th>
-                            <th class="px-5 py-3 text-left sm:px-6"><p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Status</p></th>
-                            <th class="px-5 py-3 text-left sm:px-6"><p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Actions</p></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($blogPosts as $post)
-                            <tr class="border-b border-gray-100 dark:border-gray-800">
-                                <td class="px-5 py-4 sm:px-6">
-                                    @if ($post->image)
-                                        <img src="{{ asset('storage/'.$post->image) }}" alt="" class="h-10 w-14 rounded-lg object-cover">
-                                    @endif
-                                </td>
-                                <td class="px-5 py-4 sm:px-6"><p class="text-gray-500 text-theme-sm dark:text-gray-400">{{ $post->title }}</p></td>
-                                <td class="px-5 py-4 sm:px-6"><p class="text-gray-500 text-theme-sm dark:text-gray-400">{{ $post->venue }}</p></td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    @if ($post->is_active)
-                                        <span class="rounded-full bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-500/15 dark:text-green-400">Published</span>
-                                    @else
-                                        <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-400">Draft</span>
-                                    @endif
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center gap-2">
-                                        <a href="{{ route('blog-posts.edit', $post) }}" class="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 shadow-theme-xs transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03]">Edit</a>
-                                        <form action="{{ route('blog-posts.destroy', $post) }}" method="POST" onsubmit="return confirm('Delete this post?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="inline-flex items-center justify-center rounded-lg border border-red-300 px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 dark:border-red-800 dark:hover:bg-red-500/10">Delete</button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr><td colspan="5" class="px-5 py-8 text-center"><p class="text-gray-500 dark:text-gray-400">No blog posts yet.</p></td></tr>
-                        @endforelse
-                    </tbody>
-                </table>
+            <div class="flex justify-end">
+                <x-ui.btn-add href="{{ route('blog-posts.create') }}" label="Add Post" @click.prevent="openModal('{{ route('blog-posts.create') }}')" />
             </div>
+
+            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                @forelse ($blogPosts as $post)
+                    <div class="grid-card-royal group">
+                        <div class="relative h-40 w-full overflow-hidden">
+                            @if ($post->image)
+                                <img src="{{ asset('storage/'.$post->image) }}" alt="" class="h-full w-full object-cover transition duration-300 group-hover:scale-105">
+                            @endif
+                            <div class="absolute left-3 top-3">
+                                <x-ui.status-badge :active="$post->is_active" active-label="Published" inactive-label="Draft" />
+                            </div>
+                        </div>
+                        <div class="flex flex-1 flex-col gap-1.5 p-4">
+                            <h3 class="line-clamp-2 font-display text-base font-semibold text-gray-800 dark:text-white/90">{{ $post->title }}</h3>
+                            @if ($post->venue)
+                                <p class="text-sm text-gold-600 dark:text-gold-400">{{ $post->venue }}</p>
+                            @endif
+                            <div class="mt-auto flex items-center gap-2 pt-3">
+                                <x-ui.btn-edit href="{{ route('blog-posts.edit', $post) }}" @click.prevent="openModal('{{ route('blog-posts.edit', $post) }}')" />
+                                <x-ui.btn-delete :action="route('blog-posts.destroy', $post)" confirm="Delete this post? This cannot be undone." />
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-span-full py-16 text-center text-gray-500 dark:text-gray-400">
+                        No blog posts yet &mdash; add your first one above.
+                    </div>
+                @endforelse
+            </div>
+
+            @if ($blogPosts->hasPages())
+                <div class="mt-4">{{ $blogPosts->links() }}</div>
+            @endif
         </div>
 
-        @if ($blogPosts->hasPages())
-            <div class="mt-4">{{ $blogPosts->links() }}</div>
-        @endif
+        <x-ui.crud-modal />
     </div>
 @endsection

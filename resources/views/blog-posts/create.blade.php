@@ -1,20 +1,23 @@
-@extends('layouts.app')
+@extends(request()->boolean('modal') ? 'layouts.fragment' : 'layouts.app')
 
 @section('content')
-    <x-common.page-breadcrumb pageTitle="Add Blog Post" />
+    <x-common.page-breadcrumb pageTitle="Add Blog Post" subtitle="Publish a new wedding story" />
 
-    <div class="rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
-        <div class="border-b border-gray-200 px-6 py-4 dark:border-gray-800">
-            <h3 class="text-base font-medium text-gray-800 dark:text-white/90">Add Blog Post</h3>
+    <div class="form-card-royal">
+        <div class="form-card-royal__header">
+            <h3 class="font-display text-lg font-semibold text-brand-700 dark:text-gold-200">Add Blog Post</h3>
         </div>
 
-        <form action="{{ route('blog-posts.store') }}" method="POST" enctype="multipart/form-data" class="p-6 space-y-4">
+        <form action="{{ route('blog-posts.store') }}" method="POST" enctype="multipart/form-data" class="p-6 space-y-5">
             @csrf
             @include('blog-posts._form')
 
-            <div class="flex items-center gap-3 pt-2">
-                <button type="submit" class="bg-brand-500 hover:bg-brand-600 flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-medium text-white">Add Post</button>
-                <a href="{{ route('blog-posts.index') }}" class="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-5 py-3 text-sm font-medium text-gray-700 shadow-theme-xs transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03]">Cancel</a>
+            <div class="flex items-center gap-3 border-t border-gold-300/15 pt-5">
+                <button type="submit" class="btn-royal-add">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l1.6 5.2a2 2 0 0 0 1.2 1.2L20 10l-5.2 1.6a2 2 0 0 0-1.2 1.2L12 18l-1.6-5.2a2 2 0 0 0-1.2-1.2L4 10l5.2-1.6a2 2 0 0 0 1.2-1.2L12 2z"/></svg>
+                    Save Post
+                </button>
+                <a href="{{ route('blog-posts.index') }}" data-modal-close class="btn-royal-cancel">Cancel</a>
             </div>
         </form>
     </div>

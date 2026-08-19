@@ -30,6 +30,11 @@
                 </svg>
             </button>
 
+            <div class="hidden items-center gap-3 xl:flex">
+                <span class="h-6 w-px bg-gold-300/30"></span>
+                <span class="font-display text-sm font-semibold text-brand-700 dark:text-gold-200">Rajwada Events Admin</span>
+            </div>
+
             <!-- Mobile Menu Toggle Button (visible below xl) -->
             <button
                 class="flex xl:hidden items-center justify-center w-10 h-10 text-gray-500 rounded-lg dark:text-gray-400 lg:h-11 lg:w-11"

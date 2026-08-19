@@ -7,7 +7,7 @@
 @endphp
 
 <aside id="sidebar"
-    class="fixed flex flex-col mt-0 top-0 px-5 left-0 bg-gradient-to-b from-brand-950 via-brand-900 to-brand-950 text-white h-screen transition-all duration-300 ease-in-out z-99999 border-r border-gold-300/10 shadow-2xl"
+    class="fixed flex flex-col mt-0 top-0 px-5 left-0 overflow-hidden bg-brand-950 text-white h-screen transition-all duration-300 ease-in-out z-99999 border-r border-gold-300/10 shadow-2xl"
     x-data="{
         openSubmenus: {},
         init() {
@@ -57,8 +57,13 @@
     }"
     @mouseenter="if (!$store.sidebar.isExpanded) $store.sidebar.setHovered(true)"
     @mouseleave="$store.sidebar.setHovered(false)">
+
+    <!-- Royal background: palace/wedding stage image + maroon overlay -->
+    <div class="pointer-events-none absolute inset-0 bg-[url('/assets/bg-footer.jpg')] bg-cover bg-left-top"></div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand-950/75 via-brand-950/55 to-brand-950/85"></div>
+
     <!-- Logo Section -->
-    <div class="pt-7 pb-5 flex border-b border-gold-300/15"
+    <div class="relative z-10 pt-7 pb-5 flex border-b border-gold-300/15"
         :class="(!$store.sidebar.isExpanded && !$store.sidebar.isHovered && !$store.sidebar.isMobileOpen) ?
         'xl:justify-center' :
         'justify-start'">
@@ -71,7 +76,7 @@
     </div>
 
     <!-- Navigation Menu -->
-    <div class="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
+    <div class="relative z-10 flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
         <nav class="mb-6">
             <div class="flex flex-col gap-4">
                 @foreach ($menuGroups as $groupIndex => $menuGroup)
@@ -98,6 +103,7 @@
                                     @if (isset($item['subItems']))
                                         <!-- Menu Item with Submenu -->
                                         <button @click="toggleSubmenu({{ $groupIndex }}, {{ $itemIndex }})"
+                                            title="{{ $item['name'] }}"
                                             class="menu-item group w-full"
                                             :class="[
                                                 isSubmenuOpen({{ $groupIndex }}, {{ $itemIndex }}) ?
@@ -172,9 +178,25 @@
                                                 @endforeach
                                             </ul>
                                         </div>
+                                    @elseif (!empty($item['logout']))
+                                        <!-- Logout item -->
+                                        <form action="{{ route('logout') }}" method="POST">
+                                            @csrf
+                                            <button type="submit" title="{{ $item['name'] }}" class="menu-item group menu-item-inactive w-full"
+                                                :class="(!$store.sidebar.isExpanded && !$store.sidebar.isHovered && !$store.sidebar.isMobileOpen) ? 'xl:justify-center' : 'justify-start'">
+                                                <span class="menu-item-icon-inactive">
+                                                    {!! MenuHelper::getIconSvg($item['icon']) !!}
+                                                </span>
+                                                <span
+                                                    x-show="$store.sidebar.isExpanded || $store.sidebar.isHovered || $store.sidebar.isMobileOpen"
+                                                    class="menu-item-text">
+                                                    {{ $item['name'] }}
+                                                </span>
+                                            </button>
+                                        </form>
                                     @else
                                         <!-- Simple Menu Item -->
-                                        <a href="{{ $item['path'] }}" class="menu-item group"
+                                        <a href="{{ $item['path'] }}" title="{{ $item['name'] }}" class="menu-item group"
                                             :class="[
                                                 isActive('{{ $item['path'] }}') ? 'menu-item-active' :
                                                 'menu-item-inactive',

@@ -15,24 +15,7 @@ class MenuHelper
         ];
     }
 
-    public static function getAdministrationItems(): array
-    {
-        return [
-            [
-                'icon' => 'charts',
-                'name' => 'User Management',
-                'subItems' => [
-                    [
-                        'name' => 'Users',
-                        'path' => route('users.index', absolute: false),
-                        'pro' => false
-                    ],
-                ],
-            ],
-        ];
-    }
-
-    public static function getSiteContentItems(): array
+    public static function getWebsiteContentItems(): array
     {
         return [
             [
@@ -69,15 +52,42 @@ class MenuHelper
                 'name' => 'Testimonials',
                 'path' => route('testimonials.index', absolute: false),
             ],
+        ];
+    }
+
+    public static function getCommunicationItems(): array
+    {
+        return [
             [
                 'icon' => 'email',
                 'name' => 'Contact Messages',
                 'path' => route('contact-messages.index', absolute: false),
             ],
+        ];
+    }
+
+    public static function getSettingsItems(): array
+    {
+        return [
             [
                 'icon' => 'forms',
-                'name' => 'Site Settings',
+                'name' => 'Website Settings',
                 'path' => route('settings.edit', absolute: false),
+            ],
+            [
+                'icon' => 'user-profile',
+                'name' => 'Profile',
+                'path' => route('settings.profile.edit', absolute: false),
+            ],
+            [
+                'icon' => 'charts',
+                'name' => 'Users',
+                'path' => route('users.index', absolute: false),
+            ],
+            [
+                'icon' => 'authentication',
+                'name' => 'Logout',
+                'logout' => true,
             ],
         ];
     }
@@ -86,17 +96,21 @@ class MenuHelper
     {
         return [
             [
-                'title' => 'Menu',
-                'items' => self::getMainNavItems()
+                'title' => 'Main',
+                'items' => self::getMainNavItems(),
             ],
             [
                 'title' => 'Site Content',
-                'items' => self::getSiteContentItems()
+                'items' => self::getWebsiteContentItems(),
             ],
             [
-                'title' => 'Administration',
-                'items' => self::getAdministrationItems()
-            ]
+                'title' => 'Communication',
+                'items' => self::getCommunicationItems(),
+            ],
+            [
+                'title' => 'Settings',
+                'items' => self::getSettingsItems(),
+            ],
         ];
     }
 

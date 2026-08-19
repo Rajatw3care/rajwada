@@ -1,38 +1,27 @@
-@props(['pageTitle' => 'Page'])
+@props(['pageTitle' => 'Page', 'subtitle' => null])
 
-<div class="flex flex-wrap items-center justify-between gap-3 mb-6">
-    <h2 class="font-display text-2xl font-semibold text-brand-700 dark:text-gold-200">
-        {{ $pageTitle }}
-    </h2>
+@unless (request()->boolean('modal'))
+<div class="flex flex-wrap items-start justify-between gap-3 mb-6">
+    <div>
+        <h2 class="font-display text-2xl font-semibold text-brand-700 dark:text-gold-200">
+            {{ $pageTitle }}
+        </h2>
+        @if ($subtitle)
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ $subtitle }}</p>
+        @endif
+    </div>
     <nav>
-        <ol class="flex items-center gap-1.5">
+        <ol class="flex items-center gap-2 text-sm">
             <li>
-                <a
-                    class="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400"
-                    href="{{ route('dashboard') }}"
-                >
-                    Home
-                    <svg
-                        class="stroke-current"
-                        width="17"
-                        height="16"
-                        viewBox="0 0 17 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            d="M6.0765 12.667L10.2432 8.50033L6.0765 4.33366"
-                            stroke=""
-                            stroke-width="1.2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        />
-                    </svg>
+                <a class="inline-flex items-center gap-1.5 text-gray-500 hover:text-brand-600 dark:text-gray-400 dark:hover:text-gold-300" href="{{ route('dashboard') }}">
+                    Dashboard
                 </a>
             </li>
-            <li class="text-sm text-gray-800 dark:text-white/90">
-                {{ $pageTitle }}
-            </li>
+            <li class="text-gold-400">&rsaquo;</li>
+            <li class="text-gray-500 dark:text-gray-400">Site Content</li>
+            <li class="text-gold-400">&rsaquo;</li>
+            <li class="font-medium text-brand-700 dark:text-gold-200">{{ $pageTitle }}</li>
         </ol>
     </nav>
 </div>
+@endunless

@@ -1,69 +1,71 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-common.page-breadcrumb pageTitle="Services" />
+    <div x-data="{
+        modalOpen: false,
+        modalHtml: '',
+        modalLoading: false,
+        openModal(url) {
+            this.modalOpen = true;
+            this.modalLoading = true;
+            this.modalHtml = '';
+            fetch(url + (url.includes('?') ? '&' : '?') + 'modal=1', { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                .then(r => r.text())
+                .then(html => { this.modalHtml = html; this.modalLoading = false; })
+                .catch(() => { this.modalLoading = false; this.modalHtml = '<p class=&quot;p-6 text-red-600&quot;>Failed to load form.</p>'; });
+        }
+    }">
+        <x-common.page-breadcrumb pageTitle="Services" subtitle="Manage the royal experiences offered by Rajwada Events" />
 
-    <div class="space-y-6">
-        @session('success')
-            <x-ui.alert variant="success">{{ $value }}</x-ui.alert>
-        @endsession
+        <div class="space-y-6">
+            @session('success')
+                <x-ui.alert variant="success">{{ $value }}</x-ui.alert>
+            @endsession
 
-        <div class="flex justify-end">
-            <a href="{{ route('services.create') }}" class="bg-brand-500 hover:bg-brand-600 inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-medium text-white">
-                Add Service
-            </a>
-        </div>
-
-        <div class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
-            <div class="max-w-full overflow-x-auto custom-scrollbar">
-                <table class="w-full min-w-[800px]">
-                    <thead>
-                        <tr class="border-b border-gray-100 dark:border-gray-800">
-                            <th class="px-5 py-3 text-left sm:px-6"><p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Icon</p></th>
-                            <th class="px-5 py-3 text-left sm:px-6"><p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Title</p></th>
-                            <th class="px-5 py-3 text-left sm:px-6"><p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Order</p></th>
-                            <th class="px-5 py-3 text-left sm:px-6"><p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Status</p></th>
-                            <th class="px-5 py-3 text-left sm:px-6"><p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Actions</p></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($services as $service)
-                            <tr class="border-b border-gray-100 dark:border-gray-800">
-                                <td class="px-5 py-4 sm:px-6">
-                                    @if ($service->icon)
-                                        <img src="{{ asset('storage/'.$service->icon) }}" alt="" class="h-10 w-10 rounded-lg object-cover">
-                                    @endif
-                                </td>
-                                <td class="px-5 py-4 sm:px-6"><p class="text-gray-500 text-theme-sm dark:text-gray-400">{{ $service->title }}</p></td>
-                                <td class="px-5 py-4 sm:px-6"><p class="text-gray-500 text-theme-sm dark:text-gray-400">{{ $service->sort_order }}</p></td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    @if ($service->is_active)
-                                        <span class="rounded-full bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-500/15 dark:text-green-400">Active</span>
-                                    @else
-                                        <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-400">Hidden</span>
-                                    @endif
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center gap-2">
-                                        <a href="{{ route('services.edit', $service) }}" class="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 shadow-theme-xs transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03]">Edit</a>
-                                        <form action="{{ route('services.destroy', $service) }}" method="POST" onsubmit="return confirm('Delete this service?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="inline-flex items-center justify-center rounded-lg border border-red-300 px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 dark:border-red-800 dark:hover:bg-red-500/10">Delete</button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr><td colspan="5" class="px-5 py-8 text-center"><p class="text-gray-500 dark:text-gray-400">No services yet.</p></td></tr>
-                        @endforelse
-                    </tbody>
-                </table>
+            <div class="flex justify-end">
+                <x-ui.btn-add href="{{ route('services.create') }}" label="Add Service" @click.prevent="openModal('{{ route('services.create') }}')" />
             </div>
+
+            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                @forelse ($services as $service)
+                    <div class="grid-card-royal group">
+                        <div class="flex items-start gap-4 p-5">
+                            <div class="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-gold-300/50 bg-brand-50 shadow-theme-xs dark:bg-white/5">
+                                @if ($service->icon)
+                                    <img src="{{ asset('storage/'.$service->icon) }}" alt="" class="h-full w-full object-cover">
+                                @else
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="text-brand-300" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l1.6 5.2a2 2 0 0 0 1.2 1.2L20 10l-5.2 1.6a2 2 0 0 0-1.2 1.2L12 18l-1.6-5.2a2 2 0 0 0-1.2-1.2L4 10l5.2-1.6a2 2 0 0 0 1.2-1.2L12 2z" fill="currentColor"/></svg>
+                                @endif
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <h3 class="truncate font-display text-base font-semibold text-gray-800 dark:text-white/90">{{ $service->title }}</h3>
+                                <p class="mt-1 line-clamp-2 text-sm text-gray-500 dark:text-gray-400">{{ $service->description }}</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-auto flex items-center justify-between gap-2 border-t border-gold-300/15 bg-brand-50/30 px-5 py-3 dark:bg-white/[0.02]">
+                            <div class="flex items-center gap-2">
+                                <x-ui.status-badge :active="$service->is_active" />
+                                <span class="text-xs text-gray-400">#{{ $service->sort_order }}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <x-ui.btn-edit href="{{ route('services.edit', $service) }}" @click.prevent="openModal('{{ route('services.edit', $service) }}')" />
+                                <x-ui.btn-delete :action="route('services.destroy', $service)" confirm="Delete this service? This cannot be undone." />
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-span-full py-16 text-center text-gray-500 dark:text-gray-400">
+                        No services yet &mdash; add your first one above.
+                    </div>
+                @endforelse
+            </div>
+
+            @if ($services->hasPages())
+                <div class="mt-4">{{ $services->links() }}</div>
+            @endif
         </div>
 
-        @if ($services->hasPages())
-            <div class="mt-4">{{ $services->links() }}</div>
-        @endif
+        <x-ui.crud-modal />
     </div>
 @endsection

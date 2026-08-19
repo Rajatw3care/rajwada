@@ -1,5 +1,18 @@
-<x-forms.file label="Icon" name="icon" :current="$service->icon ?? null" />
-<x-forms.input label="Title" name="title" :value="$service->title ?? ''" required />
-<x-forms.textarea label="Description" name="description" :value="$service->description ?? ''" />
-<x-forms.input label="Sort Order" name="sort_order" type="number" :value="$service->sort_order ?? 0" />
-<x-forms.checkbox label="Active (visible on site)" name="is_active" :checked="$service->is_active ?? true" />
+<x-ui.section-eyebrow label="Service Information" />
+
+<div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+    <div class="sm:col-span-2">
+        <x-forms.file label="Icon" name="icon" :current="$service->icon ?? null" />
+    </div>
+
+    <div class="sm:col-span-2">
+        <x-forms.input label="Service Title" name="title" :value="$service->title ?? ''" required />
+    </div>
+
+    <div class="sm:col-span-2">
+        <x-forms.textarea label="Description" name="description" :value="$service->description ?? ''" />
+    </div>
+
+    <x-forms.input label="Display Order" name="sort_order" type="number" :value="$service->sort_order ?? 0" />
+    <x-forms.select label="Status" name="is_active" :options="[1 => 'Active', 0 => 'Inactive']" :selected="(int) ($service->is_active ?? true)" />
+</div>

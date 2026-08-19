@@ -1,69 +1,63 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-common.page-breadcrumb pageTitle="Testimonials" />
+    <div x-data="{
+        modalOpen: false,
+        modalHtml: '',
+        modalLoading: false,
+        openModal(url) {
+            this.modalOpen = true;
+            this.modalLoading = true;
+            this.modalHtml = '';
+            fetch(url + (url.includes('?') ? '&' : '?') + 'modal=1', { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                .then(r => r.text())
+                .then(html => { this.modalHtml = html; this.modalLoading = false; })
+                .catch(() => { this.modalLoading = false; this.modalHtml = '<p class=&quot;p-6 text-red-600&quot;>Failed to load form.</p>'; });
+        }
+    }">
+        <x-common.page-breadcrumb pageTitle="Testimonials" subtitle="Client reviews shown in the homepage slider" />
 
-    <div class="space-y-6">
-        @session('success')
-            <x-ui.alert variant="success">{{ $value }}</x-ui.alert>
-        @endsession
+        <div class="space-y-6">
+            @session('success')
+                <x-ui.alert variant="success">{{ $value }}</x-ui.alert>
+            @endsession
 
-        <div class="flex justify-end">
-            <a href="{{ route('testimonials.create') }}" class="bg-brand-500 hover:bg-brand-600 inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-medium text-white">
-                Add Testimonial
-            </a>
-        </div>
-
-        <div class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
-            <div class="max-w-full overflow-x-auto custom-scrollbar">
-                <table class="w-full min-w-[900px]">
-                    <thead>
-                        <tr class="border-b border-gray-100 dark:border-gray-800">
-                            <th class="px-5 py-3 text-left sm:px-6"><p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Avatar</p></th>
-                            <th class="px-5 py-3 text-left sm:px-6"><p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Name</p></th>
-                            <th class="px-5 py-3 text-left sm:px-6"><p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Message</p></th>
-                            <th class="px-5 py-3 text-left sm:px-6"><p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Status</p></th>
-                            <th class="px-5 py-3 text-left sm:px-6"><p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Actions</p></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($testimonials as $testimonial)
-                            <tr class="border-b border-gray-100 dark:border-gray-800">
-                                <td class="px-5 py-4 sm:px-6">
-                                    @if ($testimonial->avatar)
-                                        <img src="{{ asset('storage/'.$testimonial->avatar) }}" alt="" class="h-10 w-10 rounded-full object-cover">
-                                    @endif
-                                </td>
-                                <td class="px-5 py-4 sm:px-6"><p class="text-gray-500 text-theme-sm dark:text-gray-400">{{ $testimonial->name }}</p></td>
-                                <td class="px-5 py-4 sm:px-6"><p class="max-w-xs truncate text-gray-500 text-theme-sm dark:text-gray-400">{{ $testimonial->message }}</p></td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    @if ($testimonial->is_active)
-                                        <span class="rounded-full bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-500/15 dark:text-green-400">Active</span>
-                                    @else
-                                        <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-400">Hidden</span>
-                                    @endif
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center gap-2">
-                                        <a href="{{ route('testimonials.edit', $testimonial) }}" class="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 shadow-theme-xs transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03]">Edit</a>
-                                        <form action="{{ route('testimonials.destroy', $testimonial) }}" method="POST" onsubmit="return confirm('Delete this testimonial?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="inline-flex items-center justify-center rounded-lg border border-red-300 px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 dark:border-red-800 dark:hover:bg-red-500/10">Delete</button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr><td colspan="5" class="px-5 py-8 text-center"><p class="text-gray-500 dark:text-gray-400">No testimonials yet.</p></td></tr>
-                        @endforelse
-                    </tbody>
-                </table>
+            <div class="flex justify-end">
+                <x-ui.btn-add href="{{ route('testimonials.create') }}" label="Add Testimonial" @click.prevent="openModal('{{ route('testimonials.create') }}')" />
             </div>
+
+            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                @forelse ($testimonials as $testimonial)
+                    <div class="grid-card-royal group p-5">
+                        <div class="flex items-center gap-3">
+                            <div class="h-12 w-12 shrink-0 overflow-hidden rounded-full border-2 border-gold-300/50 bg-brand-50 dark:bg-white/5">
+                                @if ($testimonial->avatar)
+                                    <img src="{{ asset('storage/'.$testimonial->avatar) }}" alt="" class="h-full w-full object-cover">
+                                @endif
+                            </div>
+                            <div class="min-w-0">
+                                <h3 class="truncate font-display text-sm font-semibold text-gray-800 dark:text-white/90">{{ $testimonial->name }}</h3>
+                                <x-ui.status-badge :active="$testimonial->is_active" />
+                            </div>
+                        </div>
+                        <p class="mt-3 line-clamp-3 text-sm text-gray-500 dark:text-gray-400">&ldquo;{{ $testimonial->message }}&rdquo;</p>
+                        <div class="mt-4 flex items-center gap-2 border-t border-gold-300/15 pt-3">
+                            <x-ui.btn-edit href="{{ route('testimonials.edit', $testimonial) }}" @click.prevent="openModal('{{ route('testimonials.edit', $testimonial) }}')" />
+                            <x-ui.btn-delete :action="route('testimonials.destroy', $testimonial)" />
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-span-full py-16 text-center text-gray-500 dark:text-gray-400">
+                        No testimonials yet &mdash; add your first one above.
+                    </div>
+                @endforelse
+            </div>
+
+            @if ($testimonials->hasPages())
+                <div class="mt-4">{{ $testimonials->links() }}</div>
+            @endif
         </div>
 
-        @if ($testimonials->hasPages())
-            <div class="mt-4">{{ $testimonials->links() }}</div>
-        @endif
+        <x-ui.crud-modal />
     </div>
 @endsection

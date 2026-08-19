@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
                 'unreadMessages' => ContactMessage::where('is_read', false)->count(),
                 'totalMessages' => ContactMessage::count(),
             ],
+            'recentMessages' => ContactMessage::latest()->limit(5)->get(),
         ]);
     })->name('dashboard');
 

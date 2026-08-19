@@ -212,7 +212,7 @@
 }
 
 @utility menu-item-active {
-  @apply border-gold-300 bg-white/10 text-gold-200;
+  @apply border-gold-300 bg-white/10 text-gold-200 shadow-[0_0_16px_-2px_rgba(216,178,94,0.4)];
 }
 
 @utility menu-item-inactive {
@@ -875,4 +875,72 @@ pre[class*='language-'] {
     svg {
         fill: none !important;
     }
+}
+
+/* ==========================================================================
+   Rajwada admin design system — buttons, badges, cards, dropzone, modal
+   ========================================================================== */
+
+@utility btn-royal-edit {
+  @apply inline-flex items-center gap-1.5 rounded-lg bg-brand-700 px-3 py-2 text-sm font-medium text-gold-100 shadow-theme-xs transition hover:bg-brand-800;
+}
+
+@utility btn-royal-delete {
+  @apply inline-flex items-center gap-1.5 rounded-lg border border-red-300 bg-transparent px-3 py-2 text-sm font-medium text-red-600 transition hover:bg-red-50 dark:border-red-800/60 dark:text-red-400 dark:hover:bg-red-500/10;
+}
+
+@utility btn-royal-add {
+  @apply inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-600 to-brand-800 px-5 py-2.5 text-sm font-medium text-gold-100 shadow-theme-md ring-1 ring-gold-300/30 transition hover:from-brand-700 hover:to-brand-900;
+}
+
+@utility btn-royal-cancel {
+  @apply inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 shadow-theme-xs transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03];
+}
+
+@utility badge-royal-active {
+  @apply inline-flex items-center gap-1.5 rounded-full bg-gold-50 px-2.5 py-1 text-xs font-medium text-brand-700 ring-1 ring-gold-300/50 dark:bg-gold-500/10 dark:text-gold-300 dark:ring-gold-300/20;
+}
+
+@utility badge-royal-inactive {
+  @apply inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-500 dark:bg-gray-800 dark:text-gray-400;
+}
+
+@utility badge-royal-new {
+  @apply inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 ring-1 ring-amber-300/50 dark:bg-amber-500/10 dark:text-amber-300;
+}
+
+@utility card-royal {
+  @apply rounded-2xl border border-gold-300/25 bg-white shadow-theme-xs dark:border-gold-300/10 dark:bg-white/[0.03];
+}
+
+@utility table-header-royal {
+  @apply bg-gradient-to-r from-brand-900 to-brand-800;
+}
+
+@utility grid-card-royal {
+  @apply relative flex flex-col overflow-hidden rounded-2xl border border-gold-300/25 bg-white shadow-theme-xs transition hover:-translate-y-0.5 hover:shadow-theme-md dark:border-gold-300/10 dark:bg-white/[0.03];
+}
+
+@utility dropzone-royal {
+  @apply relative flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-gold-300/50 bg-brand-50/30 px-6 py-8 text-center transition hover:border-gold-400 hover:bg-brand-50/60 dark:border-gold-300/20 dark:bg-white/[0.02] dark:hover:bg-white/[0.04];
+}
+
+@utility modal-overlay-royal {
+  @apply fixed inset-0 z-99999 flex items-center justify-center bg-brand-950/70 p-4 backdrop-blur-sm;
+}
+
+@utility modal-panel-royal {
+  @apply relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white shadow-theme-xl dark:bg-gray-900;
+}
+
+.section-eyebrow {
+  @apply mb-1 flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-brand-600 dark:text-gold-300;
+}
+
+.form-card-royal {
+  @apply overflow-hidden rounded-2xl border border-gold-300/25 bg-white shadow-theme-xs dark:border-gold-300/10 dark:bg-white/[0.03];
+}
+
+.form-card-royal__header {
+  @apply border-b border-gold-300/20 bg-gradient-to-r from-brand-50/60 to-transparent px-6 py-4 dark:border-gold-300/10 dark:from-brand-500/[0.06];
 }

@@ -1,8 +1,6 @@
-<div class="mx-auto mb-8 w-full max-w-60 rounded-2xl border border-gold-300/15 bg-white/5 px-4 py-5 text-center">
-    <h3 class="mb-1 font-display text-lg text-gold-200">
-        Rajwada Events
-    </h3>
-    <p class="text-white/40 text-theme-xs tracking-wide uppercase">
-        The Royal Creators
-    </p>
+<div class="mx-auto mb-8 flex w-full max-w-60 flex-col items-center gap-2 border-t border-gold-300/15 pt-5 text-center">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="text-gold-300" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 8l3 3 3-5 3 5 3-5 3 5 3-3-1.5 10h-15L3 8Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+    </svg>
+    <p class="font-display text-sm tracking-wide text-gold-200">The Royal Creators</p>
 </div>

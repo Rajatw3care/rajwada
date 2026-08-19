@@ -40,19 +40,25 @@
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
             @foreach ($cards as $card)
                 <a href="{{ $card['href'] }}"
-                    class="group rounded-2xl border border-gray-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-theme-md dark:border-gray-800 dark:bg-white/[0.03] dark:hover:border-brand-800">
-                    <div class="flex h-11 w-11 items-center justify-center rounded-xl {{ !empty($card['highlight']) ? 'bg-brand-500 text-white' : 'bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400' }}">
+                    class="group relative overflow-hidden rounded-2xl border border-gold-300/25 bg-white p-5 shadow-theme-xs transition hover:-translate-y-0.5 hover:shadow-theme-md dark:border-gold-300/10 dark:bg-white/[0.03]">
+                    <svg class="pointer-events-none absolute -right-3 -top-3 h-20 w-20 text-brand-50 dark:text-white/[0.03]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2l1.6 5.2a2 2 0 0 0 1.2 1.2L20 10l-5.2 1.6a2 2 0 0 0-1.2 1.2L12 18l-1.6-5.2a2 2 0 0 0-1.2-1.2L4 10l5.2-1.6a2 2 0 0 0 1.2-1.2L12 2z" fill="currentColor"/>
+                    </svg>
+                    <div class="relative flex h-11 w-11 items-center justify-center rounded-xl {{ !empty($card['highlight']) ? 'bg-gradient-to-br from-brand-600 to-brand-800 text-gold-100' : 'bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400' }}">
                         <span class="[&>svg]:h-5 [&>svg]:w-5">{!! MenuHelper::getIconSvg($card['icon']) !!}</span>
                     </div>
-                    <div class="mt-4">
+                    <div class="relative mt-4">
                         <span class="text-sm text-gray-500 dark:text-gray-400">{{ $card['label'] }}</span>
                         <h4 class="mt-1 font-display text-2xl font-semibold text-gray-800 dark:text-white/90">{{ $card['value'] }}</h4>
+                        @if (!empty($card['highlight']))
+                            <span class="mt-1 inline-block text-xs font-medium text-brand-600 dark:text-gold-400">Needs attention</span>
+                        @endif
                     </div>
                 </a>
             @endforeach
         </div>
 
-        <div class="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-white/[0.03]">
+        <div class="rounded-2xl border border-gold-300/25 bg-white p-6 shadow-theme-xs dark:border-gold-300/10 dark:bg-white/[0.03]">
             <div class="border-l-2 border-gold-300 pl-4">
                 <h3 class="font-display text-lg font-semibold text-brand-700 dark:text-gold-200">Manage your site</h3>
                 <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">

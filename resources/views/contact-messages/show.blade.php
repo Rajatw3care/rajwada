@@ -3,9 +3,9 @@
 @section('content')
     <x-common.page-breadcrumb pageTitle="Message from {{ $contactMessage->name }}" />
 
-    <div class="rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
-        <div class="border-b border-gray-200 px-6 py-4 dark:border-gray-800">
-            <h3 class="text-base font-medium text-gray-800 dark:text-white/90">{{ $contactMessage->name }}</h3>
+    <div class="form-card-royal">
+        <div class="form-card-royal__header">
+            <h3 class="font-display text-lg font-semibold text-brand-700 dark:text-gold-200">{{ $contactMessage->name }}</h3>
             <p class="text-sm text-gray-500 dark:text-gray-400">{{ $contactMessage->created_at->format('d M Y, h:i A') }}</p>
         </div>
 
@@ -26,13 +26,9 @@
                 <p class="whitespace-pre-line text-sm text-gray-700 dark:text-gray-300">{{ $contactMessage->message }}</p>
             </div>
 
-            <div class="flex items-center gap-3 pt-2">
-                <a href="{{ route('contact-messages.index') }}" class="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-5 py-3 text-sm font-medium text-gray-700 shadow-theme-xs transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03]">Back to inbox</a>
-                <form action="{{ route('contact-messages.destroy', $contactMessage) }}" method="POST" onsubmit="return confirm('Delete this message?')">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="inline-flex items-center justify-center rounded-lg border border-red-300 px-5 py-3 text-sm font-medium text-red-600 hover:bg-red-50 dark:border-red-800 dark:hover:bg-red-500/10">Delete</button>
-                </form>
+            <div class="flex items-center gap-3 border-t border-gold-300/15 pt-5">
+                <a href="{{ route('contact-messages.index') }}" class="btn-royal-cancel">Back to inbox</a>
+                <x-ui.btn-delete :action="route('contact-messages.destroy', $contactMessage)" confirm="Delete this message?" />
             </div>
         </div>
     </div>

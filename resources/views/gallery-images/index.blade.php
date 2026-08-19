@@ -1,44 +1,59 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-common.page-breadcrumb pageTitle="Gallery" />
+    <div x-data="{
+        modalOpen: false,
+        modalHtml: '',
+        modalLoading: false,
+        openModal(url) {
+            this.modalOpen = true;
+            this.modalLoading = true;
+            this.modalHtml = '';
+            fetch(url + (url.includes('?') ? '&' : '?') + 'modal=1', { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                .then(r => r.text())
+                .then(html => { this.modalHtml = html; this.modalLoading = false; })
+                .catch(() => { this.modalLoading = false; this.modalHtml = '<p class=&quot;p-6 text-red-600&quot;>Failed to load form.</p>'; });
+        }
+    }">
+        <x-common.page-breadcrumb pageTitle="Gallery" subtitle="Photos shown in the public gallery grid" />
 
-    <div class="space-y-6">
-        @session('success')
-            <x-ui.alert variant="success">{{ $value }}</x-ui.alert>
-        @endsession
+        <div class="space-y-6">
+            @session('success')
+                <x-ui.alert variant="success">{{ $value }}</x-ui.alert>
+            @endsession
 
-        <div class="flex justify-end">
-            <a href="{{ route('gallery-images.create') }}" class="bg-brand-500 hover:bg-brand-600 inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-medium text-white">
-                Add Image
-            </a>
-        </div>
+            <div class="flex justify-end">
+                <x-ui.btn-add href="{{ route('gallery-images.create') }}" label="Add Image" @click.prevent="openModal('{{ route('gallery-images.create') }}')" />
+            </div>
 
-        <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-            @forelse ($galleryImages as $image)
-                <div class="rounded-xl border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-white/[0.03]">
-                    <img src="{{ asset('storage/'.$image->image) }}" alt="{{ $image->alt_text }}" class="mb-3 h-32 w-full rounded-lg object-cover">
-                    <p class="mb-1 truncate text-xs text-gray-500 dark:text-gray-400" title="{{ $image->alt_text }}">{{ $image->alt_text ?: '—' }}</p>
-                    <p class="mb-2 text-xs text-gray-400">
-                        Order {{ $image->sort_order }} ·
-                        @if ($image->is_active) <span class="text-green-600">Active</span> @else <span class="text-gray-400">Hidden</span> @endif
-                    </p>
-                    <div class="flex gap-2">
-                        <a href="{{ route('gallery-images.edit', $image) }}" class="flex-1 rounded-lg border border-gray-300 px-3 py-1.5 text-center text-xs font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-white/[0.03]">Edit</a>
-                        <form action="{{ route('gallery-images.destroy', $image) }}" method="POST" onsubmit="return confirm('Delete this image?')" class="flex-1">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="w-full rounded-lg border border-red-300 px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50 dark:border-red-800 dark:hover:bg-red-500/10">Delete</button>
-                        </form>
+            <div class="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4">
+                @forelse ($galleryImages as $image)
+                    <div class="grid-card-royal group">
+                        <img src="{{ asset('storage/'.$image->image) }}" alt="{{ $image->alt_text }}" class="h-36 w-full object-cover">
+                        <div class="flex flex-1 flex-col gap-2 p-4">
+                            <p class="truncate text-sm font-medium text-gray-700 dark:text-gray-300" title="{{ $image->alt_text }}">{{ $image->alt_text ?: '—' }}</p>
+                            <div class="flex items-center gap-2">
+                                <x-ui.status-badge :active="$image->is_active" />
+                                <span class="text-xs text-gray-400">#{{ $image->sort_order }}</span>
+                            </div>
+                            <div class="mt-auto flex items-center gap-2 pt-2">
+                                <x-ui.btn-edit href="{{ route('gallery-images.edit', $image) }}" @click.prevent="openModal('{{ route('gallery-images.edit', $image) }}')" />
+                                <x-ui.btn-delete :action="route('gallery-images.destroy', $image)" />
+                            </div>
+                        </div>
                     </div>
-                </div>
-            @empty
-                <p class="text-gray-500 dark:text-gray-400">No gallery images yet.</p>
-            @endforelse
+                @empty
+                    <div class="col-span-full py-16 text-center text-gray-500 dark:text-gray-400">
+                        No gallery images yet &mdash; add your first one above.
+                    </div>
+                @endforelse
+            </div>
+
+            @if ($galleryImages->hasPages())
+                <div class="mt-4">{{ $galleryImages->links() }}</div>
+            @endif
         </div>
 
-        @if ($galleryImages->hasPages())
-            <div class="mt-4">{{ $galleryImages->links() }}</div>
-        @endif
+        <x-ui.crud-modal />
     </div>
 @endsection

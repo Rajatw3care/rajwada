@@ -1,0 +1,65 @@
+# =========================================================
+# ROOT .htaccess (index.php wale approach ke saath use karo)
+# Project root me rakhna hai, jaha "artisan" file hai
+# =========================================================
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Force HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # www -> non-www
+    RewriteCond %{HTTP_HOST} ^www\.upmanyugroup\.in [NC]
+    RewriteRule ^(.*)$ https://rajwada.mars.host4india.in/$1 [L,R=301]
+
+    # Static asset folders ko seedha public/ folder se serve karo
+    RewriteRule ^(assets|css|js|images|img|fonts|build|storage|vendor)/(.*)$ public/$1/$2 [L]
+
+    # Agar requested file public/ folder ke andar directly maujood hai
+    # (jaise sitemap.xml, deploy.php, favicon.ico, robots.txt)
+    # Relative path check use kiya hai - CageFS/jailed hosting par reliable hai
+    RewriteCond %{REQUEST_URI} !^/index\.php$
+    RewriteCond public%{REQUEST_URI} -f
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # Agar koi aur real file directly root me exist karti hai (favicon.ico, robots.txt etc)
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+
+    # Baaki sab requests (Laravel routes) ko root index.php handle karega
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+Options -Indexes
+
+# =========================================================
+# SECURITY HEADERS (securityheaders.com scan fix)
+# =========================================================
+<IfModule mod_headers.c>
+    # HSTS - browser ko hamesha HTTPS use karne ke liye force karta hai
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+    # Clickjacking se bachata hai (site ko iframe me load hone se rokta hai)
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Browser ko file ka MIME type "sniff" karne se rokta hai
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Referrer info kitni share ho, wo control karta hai
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Browser features (camera, mic, geolocation etc) ko restrict karta hai
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+    # Content-Security-Policy - abhi loose rakha hai taaki site tooti na jaaye
+    # Baad me isko apni site ke actual scripts/styles/fonts ke hisaab se tight karna
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https:; frame-ancestors 'self';"
+</IfModule>
+
+# .env block
+<FilesMatch "^\.env">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

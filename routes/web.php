@@ -22,6 +22,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FrontendController::class, 'home'])->name('home');
 Route::post('/contact', [FrontendController::class, 'submitContact'])->name('contact.submit');
 
+Route::get('/deploy.php', function () {
+    require public_path('deploy.php');
+});
+
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard', [

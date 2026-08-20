@@ -1,0 +1,43 @@
+name: Deploy website on push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+
+    environment: Rajwada
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Production Server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.RAJWADA_FTP_LIVE_HOST }}
+          username: ${{ secrets.RAJWADA_FTP_LIVE_USERNAME }}
+          key: ${{ secrets.RAJWADA_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /public_html/rajwada.mars.host4india.in/
+
+            echo "Current branch:"
+            git branch --show-current
+
+            echo "Fetching latest code..."
+            git fetch origin
+
+            echo "Switching to main..."
+            git checkout main
+
+            echo "Pulling latest code..."
+            git pull origin main
+
+            echo "Deployment completed."
+
+            git status

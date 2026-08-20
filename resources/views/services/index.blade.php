@@ -26,24 +26,36 @@
                 <x-ui.btn-add href="{{ route('services.create') }}" label="Add Service" @click.prevent="openModal('{{ route('services.create') }}')" />
             </div>
 
-            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 @forelse ($services as $service)
                     <div class="grid-card-royal group">
-                        <div class="flex items-start gap-4 p-5">
-                            <div class="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-gold-300/50 bg-brand-50 shadow-theme-xs dark:bg-white/5">
+                        <div class="h-1 w-full bg-gradient-to-r from-gold-300 via-brand-500 to-gold-300 opacity-70 transition group-hover:opacity-100"></div>
+
+                        <svg class="pointer-events-none absolute right-4 top-5 h-5 w-5 text-gold-300/40" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l1.6 5.2a2 2 0 0 0 1.2 1.2L20 10l-5.2 1.6a2 2 0 0 0-1.2 1.2L12 18l-1.6-5.2a2 2 0 0 0-1.2-1.2L4 10l5.2-1.6a2 2 0 0 0 1.2-1.2L12 2z"/></svg>
+
+                        <div class="flex flex-1 flex-col items-center gap-3 px-6 pb-2 pt-7 text-center">
+                            <div class="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-brand-50 to-gold-50 shadow-[0_6px_18px_-6px_rgba(216,178,94,0.5)] ring-2 ring-gold-300/60 transition duration-200 group-hover:ring-gold-400 dark:from-white/5 dark:to-white/5">
                                 @if ($service->icon)
                                     <img src="{{ asset('storage/'.$service->icon) }}" alt="" class="h-full w-full object-cover">
                                 @else
-                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="text-brand-300" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l1.6 5.2a2 2 0 0 0 1.2 1.2L20 10l-5.2 1.6a2 2 0 0 0-1.2 1.2L12 18l-1.6-5.2a2 2 0 0 0-1.2-1.2L4 10l5.2-1.6a2 2 0 0 0 1.2-1.2L12 2z" fill="currentColor"/></svg>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-brand-300" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l1.6 5.2a2 2 0 0 0 1.2 1.2L20 10l-5.2 1.6a2 2 0 0 0-1.2 1.2L12 18l-1.6-5.2a2 2 0 0 0-1.2-1.2L4 10l5.2-1.6a2 2 0 0 0 1.2-1.2L12 2z" fill="currentColor"/></svg>
                                 @endif
                             </div>
-                            <div class="min-w-0 flex-1">
-                                <h3 class="truncate font-display text-base font-semibold text-gray-800 dark:text-white/90">{{ $service->title }}</h3>
-                                <p class="mt-1 line-clamp-2 text-sm text-gray-500 dark:text-gray-400">{{ $service->description }}</p>
-                            </div>
+
+                            <h3 class="font-display text-lg font-semibold text-gray-800 dark:text-white/90">{{ $service->title }}</h3>
+
+                            <svg class="h-2.5 w-28 text-gold-400/70" viewBox="0 0 120 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <line x1="0" y1="5" x2="46" y2="5" stroke="currentColor" stroke-width=".9"/>
+                                <line x1="74" y1="5" x2="120" y2="5" stroke="currentColor" stroke-width=".9"/>
+                                <circle cx="60" cy="5" r="3" fill="currentColor"/>
+                                <circle cx="52" cy="5" r="2" fill="currentColor"/>
+                                <circle cx="68" cy="5" r="2" fill="currentColor"/>
+                            </svg>
+
+                            <p class="line-clamp-2 text-sm text-gray-500 dark:text-gray-400">{{ $service->description }}</p>
                         </div>
 
-                        <div class="mt-auto flex items-center justify-between gap-2 border-t border-gold-300/15 bg-brand-50/30 px-5 py-3 dark:bg-white/[0.02]">
+                        <div class="mt-auto flex items-center justify-between gap-2 border-t border-gold-300/15 bg-gradient-to-r from-brand-50/60 via-transparent to-brand-50/60 px-5 py-3 dark:from-white/[0.02] dark:to-white/[0.02]">
                             <div class="flex items-center gap-2">
                                 <x-ui.status-badge :active="$service->is_active" />
                                 <span class="text-xs text-gray-400">#{{ $service->sort_order }}</span>

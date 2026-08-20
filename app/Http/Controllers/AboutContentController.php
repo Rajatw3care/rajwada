@@ -30,9 +30,13 @@ class AboutContentController extends Controller
             'badge_image' => 'nullable|image|max:2048',
             'cta_label' => 'nullable|string|max:100',
             'cta_link' => 'nullable|string|max:255',
+            'page_banner_image' => 'nullable|image|max:4096',
+            'vision' => 'nullable|string',
+            'mission' => 'nullable|string',
+            'core_values' => 'nullable|string|max:255',
         ]);
 
-        foreach (['image_1', 'image_2', 'image_3', 'badge_image'] as $field) {
+        foreach (['image_1', 'image_2', 'image_3', 'badge_image', 'page_banner_image'] as $field) {
             if ($request->hasFile($field)) {
                 $validated[$field] = $this->storeImage($request->file($field), 'site/about', $about->$field);
             } else {

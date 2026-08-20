@@ -30,7 +30,14 @@ class MenuHelper
             [
                 'icon' => 'user-profile',
                 'name' => 'About Us',
-                'path' => route('about.edit', absolute: false),
+                'subItems' => [
+                    ['name' => 'Company Overview', 'path' => route('about.edit', absolute: false), 'pro' => false],
+                    ['name' => 'Our Story Timeline', 'path' => route('timeline-items.index', absolute: false), 'pro' => false],
+                    ['name' => 'Why Choose Us', 'path' => route('why-choose-items.index', absolute: false), 'pro' => false],
+                    ['name' => 'Our Partners', 'path' => route('partners.index', absolute: false), 'pro' => false],
+                    ['name' => 'Our Team', 'path' => route('team-members.index', absolute: false), 'pro' => false],
+                    ['name' => 'Ceremonies', 'path' => route('ceremonies.index', absolute: false), 'pro' => false],
+                ],
             ],
             [
                 'icon' => 'task',

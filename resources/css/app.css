@@ -301,6 +301,28 @@
     @apply bg-gray-200 rounded-full dark:bg-gray-700;
   }
 }
+
+@utility sidebar-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(216, 178, 94, 0.35) transparent;
+
+  &::-webkit-scrollbar {
+    @apply w-1.5;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(216, 178, 94, 0.35);
+    border-radius: 9999px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(216, 178, 94, 0.55);
+  }
+}
 .dark .custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: #344054;
 }
@@ -918,7 +940,7 @@ pre[class*='language-'] {
 }
 
 @utility grid-card-royal {
-  @apply relative flex flex-col overflow-hidden rounded-2xl border border-gold-300/25 bg-white shadow-theme-xs transition hover:-translate-y-0.5 hover:shadow-theme-md dark:border-gold-300/10 dark:bg-white/[0.03];
+  @apply relative flex flex-col overflow-hidden rounded-2xl border border-gold-300/25 bg-gradient-to-b from-white to-brand-50/30 shadow-theme-xs transition duration-200 hover:-translate-y-1 hover:border-gold-300/60 hover:shadow-[0_12px_28px_-8px_rgba(163,32,43,0.28)] dark:border-gold-300/10 dark:from-white/[0.03] dark:to-white/[0.03] dark:hover:shadow-[0_12px_28px_-8px_rgba(0,0,0,0.5)];
 }
 
 @utility dropzone-royal {

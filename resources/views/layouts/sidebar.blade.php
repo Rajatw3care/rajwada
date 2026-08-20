@@ -63,10 +63,7 @@
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand-950/75 via-brand-950/55 to-brand-950/85"></div>
 
     <!-- Logo Section -->
-    <div class="relative z-10 pt-7 pb-5 flex border-b border-gold-300/15"
-        :class="(!$store.sidebar.isExpanded && !$store.sidebar.isHovered && !$store.sidebar.isMobileOpen) ?
-        'xl:justify-center' :
-        'justify-start'">
+    <div class="relative z-10 flex justify-center border-b border-gold-300/15 pb-5 pt-7">
         <a href="{{ route('dashboard') }}">
             <img x-show="$store.sidebar.isExpanded || $store.sidebar.isHovered || $store.sidebar.isMobileOpen"
                 src="{{ asset('images/logo/rajwada-logo.png') }}" alt="Rajwada Events" width="112" height="87" class="object-contain drop-shadow-[0_2px_10px_rgba(216,178,94,0.25)]" />
@@ -76,7 +73,7 @@
     </div>
 
     <!-- Navigation Menu -->
-    <div class="relative z-10 flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
+    <div class="relative z-10 flex flex-col overflow-y-auto duration-300 ease-linear sidebar-scrollbar">
         <nav class="mb-6">
             <div class="flex flex-col gap-4">
                 @foreach ($menuGroups as $groupIndex => $menuGroup)

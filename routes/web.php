@@ -2,16 +2,21 @@
 
 use App\Http\Controllers\AboutContentController;
 use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\CeremonyController;
 use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\GalleryImageController;
 use App\Http\Controllers\HeroContentController;
 use App\Http\Controllers\HeroStripImageController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\TickerItemController;
+use App\Http\Controllers\TimelineItemController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WhyChooseItemController;
 use App\Models\BlogPost;
 use App\Models\ContactMessage;
 use App\Models\GalleryImage;
@@ -20,6 +25,7 @@ use App\Models\Testimonial;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'home'])->name('home');
+Route::get('/about', [FrontendController::class, 'about'])->name('about');
 Route::post('/contact', [FrontendController::class, 'submitContact'])->name('contact.submit');
 
 Route::get('/deploy.php', function () {
@@ -53,8 +59,13 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('hero-strip-images', HeroStripImageController::class)->except(['show', 'edit', 'update']);
     Route::resource('ticker-items', TickerItemController::class)->except(['show']);
 
-    Route::get('about', [AboutContentController::class, 'edit'])->name('about.edit');
-    Route::put('about', [AboutContentController::class, 'update'])->name('about.update');
+    Route::get('about-content', [AboutContentController::class, 'edit'])->name('about.edit');
+    Route::put('about-content', [AboutContentController::class, 'update'])->name('about.update');
+    Route::resource('timeline-items', TimelineItemController::class)->except(['show']);
+    Route::resource('why-choose-items', WhyChooseItemController::class)->except(['show']);
+    Route::resource('partners', PartnerController::class)->except(['show']);
+    Route::resource('team-members', TeamMemberController::class)->except(['show']);
+    Route::resource('ceremonies', CeremonyController::class)->except(['show']);
 
     Route::resource('services', ServiceController::class)->except(['show']);
     Route::resource('gallery-images', GalleryImageController::class)->except(['show']);

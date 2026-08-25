@@ -35,6 +35,18 @@
                     <x-forms.input label="Address" name="address" :value="$settings['address'] ?? ''" />
                     <x-forms.input label="Collaboration Email" name="collaboration_email" type="email" :value="$settings['collaboration_email'] ?? ''" />
                     <x-forms.input label="Careers Email" name="careers_email" type="email" :value="$settings['careers_email'] ?? ''" />
+                    <x-forms.input label="Office Hours" name="office_hours" :value="$settings['office_hours'] ?? ''" />
+                </div>
+
+                <x-ui.section-eyebrow label="Contact Page Map" />
+                <x-forms.textarea label="Google Maps Embed URL" name="map_embed_url" :value="$settings['map_embed_url'] ?? ''" :rows="2" />
+
+                <x-ui.section-eyebrow label="Social Links" />
+                <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                    <x-forms.input label="Instagram URL" name="social_instagram" :value="$settings['social_instagram'] ?? ''" />
+                    <x-forms.input label="Facebook URL" name="social_facebook" :value="$settings['social_facebook'] ?? ''" />
+                    <x-forms.input label="YouTube URL" name="social_youtube" :value="$settings['social_youtube'] ?? ''" />
+                    <x-forms.input label="Pinterest URL" name="social_pinterest" :value="$settings['social_pinterest'] ?? ''" />
                 </div>
 
                 <x-ui.section-eyebrow label="Footer" />

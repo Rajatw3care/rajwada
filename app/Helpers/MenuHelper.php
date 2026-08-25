@@ -47,7 +47,10 @@ class MenuHelper
             [
                 'icon' => 'ui-elements',
                 'name' => 'Gallery',
-                'path' => route('gallery-images.index', absolute: false),
+                'subItems' => [
+                    ['name' => 'Photo Gallery', 'path' => route('gallery-images.index', absolute: false), 'pro' => false],
+                    ['name' => 'Videos', 'path' => route('videos.index', absolute: false), 'pro' => false],
+                ],
             ],
             [
                 'icon' => 'pages',
@@ -57,7 +60,18 @@ class MenuHelper
             [
                 'icon' => 'chat',
                 'name' => 'Testimonials',
-                'path' => route('testimonials.index', absolute: false),
+                'subItems' => [
+                    ['name' => 'Testimonials', 'path' => route('testimonials.index', absolute: false), 'pro' => false],
+                    ['name' => 'Ratings & Recognition', 'path' => route('rating-stats.index', absolute: false), 'pro' => false],
+                ],
+            ],
+            [
+                'icon' => 'ecommerce',
+                'name' => 'Success Stories',
+                'subItems' => [
+                    ['name' => 'Success Stories', 'path' => route('success-stories.index', absolute: false), 'pro' => false],
+                    ['name' => 'Featured Destinations', 'path' => route('destinations.index', absolute: false), 'pro' => false],
+                ],
             ],
         ];
     }

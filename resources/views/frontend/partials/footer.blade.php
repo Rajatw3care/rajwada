@@ -65,11 +65,11 @@
     <div class="footer__col">
       <h3>Quick links</h3>
       <ul>
-        <li><a href="{{ route('home') }}#gallery">Gallery</a></li>
-        <li><a href="{{ route('home') }}#services">Our services</a></li>
-        <li><a href="{{ route('home') }}#services">What we do</a></li>
-        <li><a href="{{ route('home') }}#blogs">Blogs</a></li>
-        <li><a href="{{ route('home') }}#blogs">Success story</a></li>
+        <li><a href="{{ route('gallery') }}">Gallery</a></li>
+        <li><a href="{{ route('services') }}">Our services</a></li>
+        <li><a href="{{ route('services') }}">What we do</a></li>
+        <li><a href="{{ route('blogs') }}">Blogs</a></li>
+        <li><a href="{{ route('success-story') }}">Success story</a></li>
       </ul>
     </div>
 
@@ -79,8 +79,8 @@
         <li><a href="{{ route('about') }}#team">Our Team</a></li>
         <li><a href="{{ route('about') }}#why-us">Why Choose Us</a></li>
         <li><a href="{{ route('about') }}#ceremonies">Ceremonies</a></li>
-        <li><a href="{{ route('about') }}#partners">Our Partners</a></li>
-        <li><a href="{{ route('home') }}#contact">Contact Us</a></li>
+        <li><a href="{{ route('gallery') }}">Our Portfolio</a></li>
+        <li><a href="{{ route('contact') }}">Contact Us</a></li>
       </ul>
     </div>
   </div>

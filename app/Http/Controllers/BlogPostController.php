@@ -68,9 +68,12 @@ class BlogPostController extends Controller
             'excerpt' => 'nullable|string',
             'body' => 'nullable|string',
             'image' => 'nullable|image|max:4096',
+            'category' => 'nullable|string|max:100',
+            'tags' => 'nullable|string|max:255',
             'sort_order' => 'nullable|integer',
         ]);
         $validated['is_active'] = $request->boolean('is_active');
+        $validated['is_featured'] = $request->boolean('is_featured');
 
         return $validated;
     }

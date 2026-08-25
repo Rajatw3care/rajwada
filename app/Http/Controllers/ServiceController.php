@@ -29,6 +29,9 @@ class ServiceController extends Controller
         if ($request->hasFile('icon')) {
             $validated['icon'] = $this->storeImage($request->file('icon'), 'site/services');
         }
+        if ($request->hasFile('overview_image')) {
+            $validated['overview_image'] = $this->storeImage($request->file('overview_image'), 'site/services');
+        }
 
         Service::create($validated);
 
@@ -46,6 +49,9 @@ class ServiceController extends Controller
 
         if ($request->hasFile('icon')) {
             $validated['icon'] = $this->storeImage($request->file('icon'), 'site/services', $service->icon);
+        }
+        if ($request->hasFile('overview_image')) {
+            $validated['overview_image'] = $this->storeImage($request->file('overview_image'), 'site/services', $service->overview_image);
         }
 
         $service->update($validated);
@@ -66,9 +72,12 @@ class ServiceController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'icon' => 'nullable|image|max:2048',
+            'overview_image' => 'nullable|image|max:4096',
+            'overview_description' => 'nullable|string',
             'sort_order' => 'nullable|integer',
         ]);
         $validated['is_active'] = $request->boolean('is_active');
+        $validated['show_on_homepage'] = $request->boolean('show_on_homepage');
 
         return $validated;
     }

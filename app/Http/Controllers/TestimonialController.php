@@ -66,9 +66,12 @@ class TestimonialController extends Controller
             'name' => 'required|string|max:255',
             'message' => 'required|string',
             'avatar' => 'nullable|image|max:2048',
+            'event_label' => 'nullable|string|max:255',
+            'rating' => 'nullable|integer|min:1|max:5',
             'sort_order' => 'nullable|integer',
         ]);
         $validated['is_active'] = $request->boolean('is_active');
+        $validated['is_featured'] = $request->boolean('is_featured');
 
         return $validated;
     }

@@ -8,7 +8,7 @@
             <h3 class="font-display text-lg font-semibold text-brand-700 dark:text-gold-200">Edit: {{ $video->title }}</h3>
         </div>
 
-        <form action="{{ route('videos.update', $video) }}" method="POST" enctype="multipart/form-data" class="p-6 space-y-5">
+        <form id="videoForm" action="{{ route('videos.update', $video) }}" method="POST" enctype="multipart/form-data" class="p-6 space-y-5">
             @csrf
             @method('PUT')
             @include('videos._form')
@@ -22,4 +22,8 @@
             </div>
         </form>
     </div>
+
+    @push('scripts')
+        <script src="{{ asset('js/video-validation.js') }}"></script>
+    @endpush
 @endsection

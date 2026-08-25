@@ -966,3 +966,14 @@ pre[class*='language-'] {
 .form-card-royal__header {
   @apply border-b border-gold-300/20 bg-gradient-to-r from-brand-50/60 to-transparent px-6 py-4 dark:border-gold-300/10 dark:from-brand-500/[0.06];
 }
+
+/*
+  jQuery Validate builds internal selectors by joining errorClass names with
+  dots (e.g. ".mt-1.5" is parsed as two classes: "mt-1" and "5"), so a
+  dotted Tailwind class like `mt-1.5` breaks its own label-reuse lookup and
+  causes error messages to duplicate on every keystroke. Use this dot-free
+  class as the jQuery Validate `errorClass` instead.
+*/
+.form-error-text {
+  @apply mt-1.5 text-sm text-error-500;
+}

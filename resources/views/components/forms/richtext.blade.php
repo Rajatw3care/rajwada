@@ -8,6 +8,9 @@
 @if ($label)
     <label for="{{ $name }}" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
         {{ $label }}
+        @if ($required)
+            <span class="text-error-500">*</span>
+        @endif
     </label>
 @endif
 
@@ -47,11 +50,14 @@
                     plugins: [Essentials, Paragraph, Bold, Italic, Heading, Link, List, BlockQuote, Undo],
                     toolbar: ['undo', 'redo', '|', 'heading', '|', 'bold', 'italic', 'link', '|', 'bulletedList', 'numberedList', '|', 'blockQuote'],
                 }).then(function (editor) {
+                    // Keep the hidden textarea live-synced (not just on submit) so
+                    // anything reading sourceEl.value — e.g. jQuery Validate —
+                    // always sees the current editor content.
+                    var sync = function () { sourceEl.value = editor.getData(); };
+                    editor.model.document.on('change:data', sync);
                     var form = sourceEl.closest('form');
                     if (form) {
-                        form.addEventListener('submit', function () {
-                            sourceEl.value = editor.getData();
-                        });
+                        form.addEventListener('submit', sync);
                     }
                 }).catch(function (err) { console.error('CKEditor init failed', err); });
             }

@@ -32,6 +32,7 @@ class MenuHelper
                 'name' => 'About Us',
                 'subItems' => [
                     ['name' => 'Company Overview', 'path' => route('about.edit', absolute: false), 'pro' => false],
+                    ['name' => 'Vision & Mission', 'path' => route('vision-mission.edit', absolute: false), 'pro' => false],
                     ['name' => 'Our Story Timeline', 'path' => route('timeline-items.index', absolute: false), 'pro' => false],
                     ['name' => 'Why Choose Us', 'path' => route('why-choose-items.index', absolute: false), 'pro' => false],
                     ['name' => 'Our Partners', 'path' => route('partners.index', absolute: false), 'pro' => false],

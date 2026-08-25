@@ -8,7 +8,7 @@
             <h3 class="font-display text-lg font-semibold text-brand-700 dark:text-gold-200">Add Team Member</h3>
         </div>
 
-        <form action="{{ route('team-members.store') }}" method="POST" enctype="multipart/form-data" class="p-6 space-y-5">
+        <form id="teamMemberForm" action="{{ route('team-members.store') }}" method="POST" enctype="multipart/form-data" class="p-6 space-y-5">
             @csrf
             @include('team-members._form')
 
@@ -18,4 +18,8 @@
             </div>
         </form>
     </div>
+
+    @push('scripts')
+        <script src="{{ asset('js/team-member-validation.js') }}"></script>
+    @endpush
 @endsection

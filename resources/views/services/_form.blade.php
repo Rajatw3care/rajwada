@@ -2,7 +2,7 @@
 
 <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
     <div class="sm:col-span-2">
-        <x-forms.file label="Icon" name="icon" :current="$service->icon ?? null" />
+        <x-forms.file label="Icon" name="icon" :current="$service->icon ?? null" required />
     </div>
 
     <div class="sm:col-span-2">
@@ -10,7 +10,7 @@
     </div>
 
     <div class="sm:col-span-2">
-        <x-forms.textarea label="Description" name="description" :value="$service->description ?? ''" />
+        <x-forms.textarea label="Description" name="description" :value="$service->description ?? ''" required />
     </div>
 
     <div class="sm:col-span-2">
@@ -18,10 +18,10 @@
     </div>
 
     <div class="sm:col-span-2">
-        <x-forms.textarea label="Overview Description (for /services page listing)" name="overview_description" :value="$service->overview_description ?? ''" />
+        <x-forms.textarea label="Overview Description (for /services page listing)" name="overview_description" :value="$service->overview_description ?? ''" required />
     </div>
 
-    <x-forms.input label="Display Order" name="sort_order" type="number" :value="$service->sort_order ?? 0" />
+    <x-forms.input label="Display Order" name="sort_order" type="number" :value="$service->sort_order ?? 0" min="0" step="1" />
     <x-forms.select label="Status" name="is_active" :options="[1 => 'Active', 0 => 'Inactive']" :selected="(int) ($service->is_active ?? true)" />
 
     <div class="sm:col-span-2">

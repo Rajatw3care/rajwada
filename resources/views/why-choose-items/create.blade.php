@@ -8,7 +8,7 @@
             <h3 class="font-display text-lg font-semibold text-brand-700 dark:text-gold-200">Add Item</h3>
         </div>
 
-        <form action="{{ route('why-choose-items.store') }}" method="POST" enctype="multipart/form-data" class="p-6 space-y-5">
+        <form id="whyChooseItemForm" action="{{ route('why-choose-items.store') }}" method="POST" enctype="multipart/form-data" class="p-6 space-y-5">
             @csrf
             @include('why-choose-items._form')
 
@@ -18,4 +18,8 @@
             </div>
         </form>
     </div>
+
+    @push('scripts')
+        <script src="{{ asset('js/why-choose-item-validation.js') }}"></script>
+    @endpush
 @endsection

@@ -8,7 +8,7 @@
             <h3 class="font-display text-lg font-semibold text-brand-700 dark:text-gold-200">Add Service</h3>
         </div>
 
-        <form action="{{ route('services.store') }}" method="POST" enctype="multipart/form-data" class="p-6 space-y-5">
+        <form id="serviceForm" action="{{ route('services.store') }}" method="POST" enctype="multipart/form-data" class="p-6 space-y-5">
             @csrf
             @include('services._form')
 
@@ -21,4 +21,8 @@
             </div>
         </form>
     </div>
+
+    @push('scripts')
+        <script src="{{ asset('js/service-validation.js') }}"></script>
+    @endpush
 @endsection

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gallery — Rajwada Events | The Royal Creators</title>
+  <meta name="description"
+    content="Explore Rajwada Events' portfolio of royal weddings, destination celebrations and ceremonies — photo galleries, highlight films and cinematic wedding stories from across Rajasthan.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html" aria-label="Rajwada Events — home">
+        <img src="assets/logo.png" alt="Rajwada Events, The Royal Creators" width="180" height="120">
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav"
+        aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="main-nav" id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="gallery.html" aria-current="page">Gallery</a></li>
+          <li><a href="index.html#services">What We Do</a></li>
+          <li><a href="index.html#blogs">Blogs</a></li>
+          <li><a href="index.html#blogs">Stories</a></li>
+          <li><a href="index.html#testimonials">Testimonials</a></li>
+          <li><a href="index.html#contact">Contact&nbsp; Us</a></li>
+          <li><a href="index.html#contact">Enquire Now</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ PAGE BANNER (Hero Banner) ============ -->
+    <section class="page-banner" aria-label="Rajwada Events Gallery">
+      <div class="page-banner__media" aria-hidden="true">
+        <img src="assets/gallery-5.jpg" alt="" loading="eager" fetchpriority="high">
+      </div>
+      <div class="page-banner__overlay" aria-hidden="true"></div>
+
+      <div class="container page-banner__inner">
+        <p class="page-banner__eyebrow">The Royal Creators</p>
+        <h1>Gallery</h1>
+        <p class="page-intro"> Our Services presents an overview of Rajwada Events' wedding and event management expertise, helping you discover exactly how we bring every celebration to life.
+From the first venue visit to the final farewell, our team designs, plans and manages every requirement of your event with the elegance of Rajasthan's royal heritage and the precision of a seasoned crew.</p>
+        <img class="ornament" src="assets/ornament-light.svg" alt="" aria-hidden="true" loading="lazy">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a><span>/</span><span aria-current="page">Gallery</span>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ============ GALLERY INTRO ============ -->
+    <!-- <section class="gallery-intro" aria-labelledby="gallery-intro-title">
+      <div class="container">
+        <span class="gallery-intro__eyebrow" id="gallery-intro-title">A Glimpse Into Our World</span>
+        <p>The Gallery showcases Rajwada Events' portfolio through high-quality images and videos of weddings and
+          events — a window into the company's work and the experiences we craft for every couple and every guest.</p>
+      </div>
+    </section> -->
+
+    <!-- ============ PHOTO GALLERY + GALLERY FILTER + CATEGORIES ============ -->
+    <section class="photo-gallery" id="photo-gallery" aria-labelledby="photo-gallery-title">
+      <div class="container">
+        <h2 class="section-title title-maroon" id="photo-gallery-title">Photo Gallery</h2>
+        <img class="ornament" src="assets/ornament-dark.svg" alt="" aria-hidden="true" loading="lazy">
+        <p class="section-lead">Browse our high-quality images, categorised by event type — from royal weddings to
+          intimate ceremonies.</p>
+
+        <!-- Gallery Filter / Gallery Categories -->
+        <div class="gallery-filter" role="tablist" aria-label="Filter gallery by category">
+          <button class="gallery-filter__btn is-active" type="button" data-filter="all" role="tab"
+            aria-selected="true">All</button>
+          <button class="gallery-filter__btn" type="button" data-filter="royal" role="tab"
+            aria-selected="false">Royal Weddings</button>
+          <button class="gallery-filter__btn" type="button" data-filter="destination" role="tab"
+            aria-selected="false">Destination Weddings</button>
+          <button class="gallery-filter__btn" type="button" data-filter="haldi" role="tab"
+            aria-selected="false">Haldi Ceremony</button>
+          <button class="gallery-filter__btn" type="button" data-filter="mehendi" role="tab"
+            aria-selected="false">Mehendi Ceremony</button>
+          <button class="gallery-filter__btn" type="button" data-filter="sangeet" role="tab"
+            aria-selected="false">Sangeet Night</button>
+          <button class="gallery-filter__btn" type="button" data-filter="reception" role="tab"
+            aria-selected="false">Reception</button>
+        </div>
+
+        <!-- Image Preview grid (masonry) -->
+        <div class="photo-masonry" id="photoMasonry">
+
+          <button class="photo-masonry__item" type="button" data-category="royal"
+            data-title="A Royal Jaimala" data-cat-label="Royal Weddings">
+            <img src="assets/hero-strip-1.jpg" alt="Bride and groom exchanging garlands at a royal jaimala ceremony" loading="lazy">
+            <span class="photo-masonry__item__overlay">
+              <span class="photo-masonry__item__cat">Royal Weddings</span>
+              <span class="photo-masonry__item__title">A Royal Jaimala</span>
+            </span>
+            <span class="photo-masonry__item__zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+          </button>
+
+          <button class="photo-masonry__item" type="button" data-category="mehendi"
+            data-title="Bridal Mehendi &amp; Bangles" data-cat-label="Mehendi Ceremony">
+            <img src="assets/gallery-1.jpg" alt="Bridal hands with mehendi and red bangles" loading="lazy">
+            <span class="photo-masonry__item__overlay">
+              <span class="photo-masonry__item__cat">Mehendi Ceremony</span>
+              <span class="photo-masonry__item__title">Bridal Mehendi &amp; Bangles</span>
+            </span>
+            <span class="photo-masonry__item__zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+          </button>
+
+          <button class="photo-masonry__item" type="button" data-category="reception"
+            data-title="An Evening at the Banquet" data-cat-label="Reception">
+            <img src="assets/gallery-3.jpg" alt="Banquet hall styled for a reception" loading="lazy">
+            <span class="photo-masonry__item__overlay">
+              <span class="photo-masonry__item__cat">Reception</span>
+              <span class="photo-masonry__item__title">An Evening at the Banquet</span>
+            </span>
+            <span class="photo-masonry__item__zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+          </button>
+
+          <button class="photo-masonry__item" type="button" data-category="haldi"
+            data-title="Under the Floral Canopy" data-cat-label="Haldi Ceremony">
+            <img src="assets/gallery-8.jpg" alt="Bride under a floral canopy with bridesmaids in pastel lehengas" loading="lazy">
+            <span class="photo-masonry__item__overlay">
+              <span class="photo-masonry__item__cat">Haldi Ceremony</span>
+              <span class="photo-masonry__item__title">Under the Floral Canopy</span>
+            </span>
+            <span class="photo-masonry__item__zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+          </button>
+
+          <button class="photo-masonry__item" type="button" data-category="royal"
+            data-title="Baraat on Elephant Back" data-cat-label="Royal Weddings">
+            <img src="assets/gallery-4.jpg" alt="Decorated elephant before Hawa Mahal" loading="lazy">
+            <span class="photo-masonry__item__overlay">
+              <span class="photo-masonry__item__cat">Royal Weddings</span>
+              <span class="photo-masonry__item__title">Baraat on Elephant Back</span>
+            </span>
+            <span class="photo-masonry__item__zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+          </button>
+
+          <button class="photo-masonry__item" type="button" data-category="sangeet"
+            data-title="Sangeet Under the Stars" data-cat-label="Sangeet Night">
+            <img src="assets/hero-strip-4.jpg" alt="Bride and groom laughing together at a sangeet celebration" loading="lazy">
+            <span class="photo-masonry__item__overlay">
+              <span class="photo-masonry__item__cat">Sangeet Night</span>
+              <span class="photo-masonry__item__title">Sangeet Under the Stars</span>
+            </span>
+            <span class="photo-masonry__item__zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+          </button>
+
+          <button class="photo-masonry__item" type="button" data-category="royal"
+            data-title="Beneath the Floral Chandelier" data-cat-label="Royal Weddings">
+            <img src="assets/gallery-5.jpg" alt="Couple under a floral chandelier mandap" loading="lazy">
+            <span class="photo-masonry__item__overlay">
+              <span class="photo-masonry__item__cat">Royal Weddings</span>
+              <span class="photo-masonry__item__title">Beneath the Floral Chandelier</span>
+            </span>
+            <span class="photo-masonry__item__zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+          </button>
+
+          <button class="photo-masonry__item" type="button" data-category="destination"
+            data-title="Behind the Mirrored Doors" data-cat-label="Destination Weddings">
+            <img src="assets/hero-strip-3.jpg" alt="Bride peeking through mirrored haveli doors" loading="lazy">
+            <span class="photo-masonry__item__overlay">
+              <span class="photo-masonry__item__cat">Destination Weddings</span>
+              <span class="photo-masonry__item__title">Behind the Mirrored Doors</span>
+            </span>
+            <span class="photo-masonry__item__zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+          </button>
+
+          <button class="photo-masonry__item" type="button" data-category="sangeet"
+            data-title="Sparkler Fountain First Dance" data-cat-label="Sangeet Night">
+            <img src="assets/gallery-7.jpg" alt="Couple dancing amid sparkler fountains" loading="lazy">
+            <span class="photo-masonry__item__overlay">
+              <span class="photo-masonry__item__cat">Sangeet Night</span>
+              <span class="photo-masonry__item__title">Sparkler Fountain First Dance</span>
+            </span>
+            <span class="photo-masonry__item__zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+          </button>
+
+          <button class="photo-masonry__item" type="button" data-category="royal"
+            data-title="Emerald &amp; Gold Mandap" data-cat-label="Royal Weddings">
+            <img src="assets/gallery-6.jpg" alt="Emerald and gold mandap entrance" loading="lazy">
+            <span class="photo-masonry__item__overlay">
+              <span class="photo-masonry__item__cat">Royal Weddings</span>
+              <span class="photo-masonry__item__title">Emerald &amp; Gold Mandap</span>
+            </span>
+            <span class="photo-masonry__item__zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+          </button>
+
+          <button class="photo-masonry__item" type="button" data-category="mehendi"
+            data-title="Hands Adorned in Henna" data-cat-label="Mehendi Ceremony">
+            <img src="assets/hero-strip-2.jpg" alt="Close-up of bridal hands with intricate mehendi and bangles" loading="lazy">
+            <span class="photo-masonry__item__overlay">
+              <span class="photo-masonry__item__cat">Mehendi Ceremony</span>
+              <span class="photo-masonry__item__title">Hands Adorned in Henna</span>
+            </span>
+            <span class="photo-masonry__item__zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+          </button>
+
+          <button class="photo-masonry__item" type="button" data-category="sangeet"
+            data-title="A Royal Family Portrait" data-cat-label="Sangeet Night">
+            <img src="assets/gallery-2.jpg" alt="Family portrait in traditional Rajasthani attire before a lit palace" loading="lazy">
+            <span class="photo-masonry__item__overlay">
+              <span class="photo-masonry__item__cat">Sangeet Night</span>
+              <span class="photo-masonry__item__title">A Royal Family Portrait</span>
+            </span>
+            <span class="photo-masonry__item__zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+          </button>
+
+          <button class="photo-masonry__item" type="button" data-category="reception"
+            data-title="The Grand Descent" data-cat-label="Reception">
+            <img src="assets/about-3.jpg" alt="Bride descending a lit staircase with a long veil" loading="lazy">
+            <span class="photo-masonry__item__overlay">
+              <span class="photo-masonry__item__cat">Reception</span>
+              <span class="photo-masonry__item__title">The Grand Descent</span>
+            </span>
+            <span class="photo-masonry__item__zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+          </button>
+
+          <button class="photo-masonry__item" type="button" data-category="destination"
+            data-title="A Haveli Chamber Romance" data-cat-label="Destination Weddings">
+            <img src="assets/about-2.jpg" alt="Couple in a mirrored haveli chamber" loading="lazy">
+            <span class="photo-masonry__item__overlay">
+              <span class="photo-masonry__item__cat">Destination Weddings</span>
+              <span class="photo-masonry__item__title">A Haveli Chamber Romance</span>
+            </span>
+            <span class="photo-masonry__item__zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+          </button>
+
+          <button class="photo-masonry__item" type="button" data-category="royal"
+            data-title="Procession Through the Fort Gate" data-cat-label="Royal Weddings">
+            <img src="assets/hero-strip-5.jpg" alt="Decorated elephant procession through a Rajasthani fort gate" loading="lazy">
+            <span class="photo-masonry__item__overlay">
+              <span class="photo-masonry__item__cat">Royal Weddings</span>
+              <span class="photo-masonry__item__title">Procession Through the Fort Gate</span>
+            </span>
+            <span class="photo-masonry__item__zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+          </button>
+
+          <button class="photo-masonry__item" type="button" data-category="royal"
+            data-title="Bride &amp; Groom, Chandelier Mandap" data-cat-label="Royal Weddings">
+            <img src="assets/about-1.jpg" alt="Bride and groom beneath a floral chandelier mandap" loading="lazy">
+            <span class="photo-masonry__item__overlay">
+              <span class="photo-masonry__item__cat">Royal Weddings</span>
+              <span class="photo-masonry__item__title">Bride &amp; Groom, Chandelier Mandap</span>
+            </span>
+            <span class="photo-masonry__item__zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+          </button>
+
+        </div>
+
+        <p class="gallery-empty" id="galleryEmpty">No moments in this category just yet — more stories coming soon.</p>
+
+        <div class="gallery-cta">
+          <p>Loved what you see? Let&rsquo;s start planning a celebration of your own.</p>
+        
+          <div class="center-action">
+        <a class="btn-ornate" href="#"><img src="assets/btn-ornate-red.png" alt="" aria-hidden="true">Enquire Now</a>
+      </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VIDEO GALLERY ============ -->
+    <section class="video-gallery" id="video-gallery" aria-labelledby="video-gallery-title">
+      <div class="container">
+        <h2 class="section-title title-cream" id="video-gallery-title">Video Gallery</h2>
+        <img class="ornament" src="assets/ornament-light.svg" alt="" aria-hidden="true" loading="lazy">
+        <p class="section-lead section-lead--light">Event highlight videos and wedding films that bring every
+          celebration back to life.</p>
+
+        <div class="video-grid">
+
+          <button class="video-card" type="button" data-title="The Royal Vows" data-tag="Wedding Film">
+            <img src="assets/hero-strip-1.jpg" alt="Wedding film thumbnail — the royal vows" loading="lazy">
+            <span class="video-card__scrim" aria-hidden="true"></span>
+            <span class="video-card__duration">04:12</span>
+            <span class="video-card__play" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg>
+            </span>
+            <span class="video-card__meta">
+              <span class="video-card__tag">Wedding Film</span>
+              <span class="video-card__title">The Royal Vows</span>
+            </span>
+          </button>
+
+          <button class="video-card" type="button" data-title="Sangeet Nights" data-tag="Highlight Reel">
+            <img src="assets/hero-strip-4.jpg" alt="Highlight reel thumbnail — sangeet night" loading="lazy">
+            <span class="video-card__scrim" aria-hidden="true"></span>
+            <span class="video-card__duration">02:47</span>
+            <span class="video-card__play" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg>
+            </span>
+            <span class="video-card__meta">
+              <span class="video-card__tag">Highlight Reel</span>
+              <span class="video-card__title">Sangeet Nights</span>
+            </span>
+          </button>
+
+          <button class="video-card" type="button" data-title="Destination Diaries" data-tag="Wedding Film">
+            <img src="assets/about-2.jpg" alt="Wedding film thumbnail — destination diaries" loading="lazy">
+            <span class="video-card__scrim" aria-hidden="true"></span>
+            <span class="video-card__duration">05:30</span>
+            <span class="video-card__play" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg>
+            </span>
+            <span class="video-card__meta">
+              <span class="video-card__tag">Wedding Film</span>
+              <span class="video-card__title">Destination Diaries</span>
+            </span>
+          </button>
+
+          <button class="video-card" type="button" data-title="Haldi &amp; Mehendi Moments" data-tag="Highlight Reel">
+            <img src="assets/gallery-8.jpg" alt="Highlight reel thumbnail — haldi and mehendi moments" loading="lazy">
+            <span class="video-card__scrim" aria-hidden="true"></span>
+            <span class="video-card__duration">03:05</span>
+            <span class="video-card__play" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg>
+            </span>
+            <span class="video-card__meta">
+              <span class="video-card__tag">Highlight Reel</span>
+              <span class="video-card__title">Haldi &amp; Mehendi Moments</span>
+            </span>
+          </button>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ IMAGE / VIDEO PREVIEW (LIGHTBOX) ============ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Gallery preview">
+    <div class="lightbox__frame">
+      <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" type="button" aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+
+      <img class="lightbox__img" id="lbImg" src="" alt="">
+      <span class="lightbox__play-badge" id="lbPlayBadge" hidden aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg>
+      </span>
+
+      <button class="lightbox__nav lightbox__nav--next" id="lbNext" type="button" aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+      <button class="lightbox__close" id="lbClose" type="button" aria-label="Close preview">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+      </button>
+
+      <div class="lightbox__caption">
+        <p class="cat" id="lbCat"></p>
+        <p class="ttl" id="lbTitle"></p>
+        <p class="note" id="lbNote" hidden>Full film premiering soon — follow us for the release.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <img src="assets/logo.png" alt="Rajwada Events, The Royal Creators" loading="lazy">
+      </div>
+
+      <div class="footer__col footer__col--bulleted">
+        <h3>Contact us</h3>
+        <div class="contact-info">
+
+          <div class="contact-item">
+            <span class="contact-icon">
+              <!-- Location -->
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z" />
+                <circle cx="12" cy="9" r="2.5" />
+              </svg>
+            </span>
+            <span>Jaipur , Rajasthan, India</span>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-icon">
+              <!-- WhatsApp -->
+              <span class="contact-icon whatsapp-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M19.05 4.91005C18.1331 3.98416 17.0411 3.25002 15.8376 2.75042C14.634 2.25081 13.3431 1.99574 12.04 2.00005C6.58005 2.00005 2.13005 6.45005 2.13005 11.9101C2.13005 13.6601 2.59005 15.3601 3.45005 16.8601L2.05005 22.0001L7.30005 20.6201C8.75005 21.4101 10.38 21.8301 12.04 21.8301C17.5 21.8301 21.9501 17.3801 21.9501 11.9201C21.9501 9.27005 20.92 6.78005 19.05 4.91005ZM12.04 20.1501C10.56 20.1501 9.11005 19.7501 7.84005 19.0001L7.54005 18.8201L4.42005 19.6401L5.25005 16.6001L5.05005 16.2901C4.2276 14.9771 3.79097 13.4593 3.79005 11.9101C3.79005 7.37005 7.49005 3.67005 12.03 3.67005C14.23 3.67005 16.3 4.53005 17.85 6.09005C18.6177 6.85392 19.226 7.7626 19.6397 8.76338C20.0534 9.76417 20.2642 10.8371 20.26 11.9201C20.28 16.4601 16.58 20.1501 12.04 20.1501ZM16.56 13.9901C16.31 13.8701 15.09 13.2701 14.87 13.1801C14.64 13.1001 14.48 13.0601 14.31 13.3001C14.14 13.5501 13.67 14.1101 13.53 14.2701C13.39 14.4401 13.24 14.4601 12.99 14.3301C12.74 14.2101 11.94 13.9401 11 13.1001C10.26 12.4401 9.77005 11.6301 9.62005 11.3801C9.48005 11.1301 9.60005 11.0001 9.73005 10.8701C9.84005 10.7601 9.98005 10.5801 10.1 10.4401C10.22 10.3001 10.27 10.1901 10.35 10.0301C10.43 9.86005 10.39 9.72005 10.33 9.60005C10.27 9.48005 9.77005 8.26005 9.57005 7.76005C9.37005 7.28005 9.16005 7.34005 9.01005 7.33005H8.53005C8.36005 7.33005 8.10005 7.39005 7.87005 7.64005C7.65005 7.89005 7.01005 8.49005 7.01005 9.71005C7.01005 10.9301 7.90005 12.1101 8.02005 12.2701C8.14005 12.4401 9.77005 14.9401 12.25 16.0101C12.84 16.2701 13.3 16.4201 13.66 16.5301C14.25 16.7201 14.79 16.6901 15.22 16.6301C15.7 16.5601 16.69 16.0301 16.89 15.4501C17.1 14.8701 17.1 14.3801 17.03 14.2701C16.96 14.1601 16.81 14.1101 16.56 13.9901Z"
+                    fill="#F7ECD7" />
+                </svg>
+              </span>
+            </span>
+            <span>+91 97722 50557</span>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-icon">
+              <!-- Phone -->
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M6.6 2.5 9 2c.5-.1 1 .2 1.2.7l1.2 3c.2.5.1 1-.3 1.3L9.7 8.3a15.8 15.8 0 0 0 6 6l1.3-1.4c.4-.4.9-.5 1.3-.3l3 1.2c.5.2.8.7.7 1.2l-.5 2.4c-.1.6-.6 1-1.2 1C10.5 18.4 5.6 13.5 5.6 6c0-.6.4-1.1 1-1.2Z" />
+              </svg>
+            </span>
+            <span>+91 94144 99933</span>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-icon">
+              <!-- Email -->
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="2.5" y="5" width="19" height="14" rx="1" />
+                <path d="m3 6 9 7 9-7" />
+              </svg>
+            </span>
+            <span>info@rajwadaevents.com</span>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h3>Quick links</h3>
+        <ul>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="index.html#services">Our services</a></li>
+          <li><a href="index.html#services">What we do</a></li>
+          <li><a href="index.html#blogs">Blogs</a></li>
+          <li><a href="index.html#blogs">Success story</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h3>Useful Links</h3>
+        <ul>
+          <li><a href="about.html#team">Our Team</a></li>
+          <li><a href="about.html#why-us">Why Choose Us</a></li>
+          <li><a href="about.html#ceremonies">Ceremonies</a></li>
+          <li><a href="about.html#partners">Our Partners</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__strip">
+      <div class="container">
+        <p>©2026 Rajwada Events | All Rights Reserved.</p>
+        <p style="display: flex; align-items: center;">Crafted with <img style="margin: 0px 5px;" src="assets/heart.svg"
+            alt=""> by W3care</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* ---- mobile navigation ---- */
+      var toggle = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('primary-nav');
+
+      toggle.addEventListener('click', function () {
+        var open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        nav.classList.toggle('is-open', !open);
+      });
+
+      nav.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          toggle.setAttribute('aria-expanded', 'false');
+          nav.classList.remove('is-open');
+        }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+          toggle.setAttribute('aria-expanded', 'false');
+          nav.classList.remove('is-open');
+          toggle.focus();
+        }
+      });
+    })();
+  </script>
+
+  <!-- ============ GALLERY FILTER + LIGHTBOX ============ -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ---------- Gallery filter ---------- */
+      var filterBtns = Array.prototype.slice.call(document.querySelectorAll('.gallery-filter__btn'));
+      var items = Array.prototype.slice.call(document.querySelectorAll('.photo-masonry__item'));
+      var emptyMsg = document.getElementById('galleryEmpty');
+
+      function applyFilter(value) {
+        var visibleCount = 0;
+        items.forEach(function (item) {
+          var match = value === 'all' || item.dataset.category === value;
+          item.classList.toggle('is-hidden', !match);
+          if (match) visibleCount++;
+        });
+        emptyMsg.classList.toggle('is-visible', visibleCount === 0);
+      }
+
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(function (b) {
+            b.classList.remove('is-active');
+            b.setAttribute('aria-selected', 'false');
+          });
+          btn.classList.add('is-active');
+          btn.setAttribute('aria-selected', 'true');
+          applyFilter(btn.dataset.filter);
+        });
+      });
+
+      /* ---------- Lightbox (Image Preview) ---------- */
+      var lightbox = document.getElementById('lightbox');
+      var lbImg = document.getElementById('lbImg');
+      var lbCat = document.getElementById('lbCat');
+      var lbTitle = document.getElementById('lbTitle');
+      var lbNote = document.getElementById('lbNote');
+      var lbPlayBadge = document.getElementById('lbPlayBadge');
+      var lbClose = document.getElementById('lbClose');
+      var lbPrev = document.getElementById('lbPrev');
+      var lbNext = document.getElementById('lbNext');
+
+      var photoItems = items; // full list, navigation cycles through all photos
+      var currentIndex = -1;
+      var mode = 'photo';
+
+      function openPhoto(index) {
+        mode = 'photo';
+        currentIndex = index;
+        var item = photoItems[index];
+        var img = item.querySelector('img');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lbCat.textContent = item.dataset.catLabel || '';
+        lbTitle.textContent = item.dataset.title || '';
+        lbNote.hidden = true;
+        lbPlayBadge.hidden = true;
+        lbPrev.style.display = '';
+        lbNext.style.display = '';
+        openLightbox();
+      }
+
+      function openVideo(card) {
+        mode = 'video';
+        var img = card.querySelector('img');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lbCat.textContent = card.dataset.tag || '';
+        lbTitle.textContent = card.dataset.title || '';
+        lbNote.hidden = false;
+        lbPlayBadge.hidden = false;
+        lbPrev.style.display = 'none';
+        lbNext.style.display = 'none';
+        openLightbox();
+      }
+
+      function openLightbox() {
+        lightbox.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+
+      function step(dir) {
+        if (mode !== 'photo' || currentIndex === -1) return;
+        var next = currentIndex;
+        for (var i = 0; i < photoItems.length; i++) {
+          next = (next + dir + photoItems.length) % photoItems.length;
+          openPhoto(next);
+          return;
+        }
+      }
+
+      photoItems.forEach(function (item, index) {
+        item.addEventListener('click', function () {
+          openPhoto(index);
+        });
+      });
+
+      Array.prototype.slice.call(document.querySelectorAll('.video-card')).forEach(function (card) {
+        card.addEventListener('click', function () {
+          openVideo(card);
+        });
+      });
+
+      lbClose.addEventListener('click', closeLightbox);
+      lbPrev.addEventListener('click', function () { step(-1); });
+      lbNext.addEventListener('click', function () { step(1); });
+
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (!lightbox.classList.contains('is-open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') step(-1);
+        if (e.key === 'ArrowRight') step(1);
+      });
+    })();
+  </script>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- Slick JS -->
+  <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+</body>
+
+</html>

@@ -8,7 +8,7 @@
             <h3 class="font-display text-lg font-semibold text-brand-700 dark:text-gold-200">Add Rating Stat</h3>
         </div>
 
-        <form action="{{ route('rating-stats.store') }}" method="POST" class="p-6 space-y-5">
+        <form id="ratingStatForm" action="{{ route('rating-stats.store') }}" method="POST" class="p-6 space-y-5">
             @csrf
             @include('rating-stats._form')
 
@@ -21,4 +21,8 @@
             </div>
         </form>
     </div>
+
+    @push('scripts')
+        <script src="{{ asset('js/rating-stat-validation.js') }}"></script>
+    @endpush
 @endsection

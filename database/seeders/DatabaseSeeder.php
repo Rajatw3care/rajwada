@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         );
 
         $this->call(RajwadaContentSeeder::class);
+        $this->call(AdditionalPagesSeeder::class);
     }
 }

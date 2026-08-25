@@ -8,12 +8,13 @@ use Illuminate\Support\Str;
 class BlogPost extends Model
 {
     protected $fillable = [
-        'title', 'slug', 'image', 'venue', 'excerpt', 'body',
-        'sort_order', 'is_active', 'published_at',
+        'title', 'slug', 'image', 'venue', 'excerpt', 'body', 'category', 'tags',
+        'sort_order', 'is_active', 'is_featured', 'published_at',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'is_featured' => 'boolean',
         'published_at' => 'datetime',
     ];
 

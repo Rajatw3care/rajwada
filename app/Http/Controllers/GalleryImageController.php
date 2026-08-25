@@ -27,6 +27,8 @@ class GalleryImageController extends Controller
         $validated = $request->validate([
             'image' => 'required|image|max:4096',
             'alt_text' => 'nullable|string|max:255',
+            'title' => 'nullable|string|max:255',
+            'category' => 'nullable|in:royal,destination,haldi,mehendi,sangeet,reception',
             'sort_order' => 'nullable|integer',
         ]);
         $validated['is_active'] = $request->boolean('is_active');
@@ -47,6 +49,8 @@ class GalleryImageController extends Controller
         $validated = $request->validate([
             'image' => 'nullable|image|max:4096',
             'alt_text' => 'nullable|string|max:255',
+            'title' => 'nullable|string|max:255',
+            'category' => 'nullable|in:royal,destination,haldi,mehendi,sangeet,reception',
             'sort_order' => 'nullable|integer',
         ]);
         $validated['is_active'] = $request->boolean('is_active');

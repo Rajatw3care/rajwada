@@ -14,6 +14,8 @@ class SettingController extends Controller
         'site_name', 'site_tagline', 'meta_description', 'logo',
         'phone', 'whatsapp', 'email', 'address',
         'collaboration_email', 'careers_email', 'footer_copyright',
+        'office_hours', 'map_embed_url',
+        'social_instagram', 'social_facebook', 'social_youtube', 'social_pinterest',
     ];
 
     public function edit()
@@ -37,6 +39,12 @@ class SettingController extends Controller
             'collaboration_email' => 'nullable|email|max:255',
             'careers_email' => 'nullable|email|max:255',
             'footer_copyright' => 'nullable|string|max:255',
+            'office_hours' => 'nullable|string|max:255',
+            'map_embed_url' => 'nullable|string|max:2000',
+            'social_instagram' => 'nullable|string|max:255',
+            'social_facebook' => 'nullable|string|max:255',
+            'social_youtube' => 'nullable|string|max:255',
+            'social_pinterest' => 'nullable|string|max:255',
         ]);
 
         if ($request->hasFile('logo')) {

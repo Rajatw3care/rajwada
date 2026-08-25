@@ -168,13 +168,13 @@
             </figure>
             <h3>{{ $post->title }}</h3>
             @if ($post->venue)<p class="venue">{{ $post->venue }}</p>@endif
-            <a class="btn-pill" href="#blogs">Read more </a>
+            <a class="btn-pill" href="{{ route('blog.show', $post->slug) }}">Read more </a>
           </article>
         @endforeach
       </div>
 
       <div class="center-action">
-        <a class="btn-ornate" href="#blogs"><img src="{{ asset('assets/btn-ornate-red.png') }}" alt="" aria-hidden="true">See More Articles :-</a>
+        <a class="btn-ornate" href="{{ route('blogs') }}"><img src="{{ asset('assets/btn-ornate-red.png') }}" alt="" aria-hidden="true">See More Articles :-</a>
       </div>
     </div>
   </section>

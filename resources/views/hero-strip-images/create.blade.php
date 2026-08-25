@@ -8,11 +8,11 @@
             <h3 class="font-display text-lg font-semibold text-brand-700 dark:text-gold-200">Add Image</h3>
         </div>
 
-        <form action="{{ route('hero-strip-images.store') }}" method="POST" enctype="multipart/form-data" class="p-6 space-y-4">
+        <form id="heroStripImageForm" action="{{ route('hero-strip-images.store') }}" method="POST" enctype="multipart/form-data" class="p-6 space-y-4">
             @csrf
 
             <x-forms.file label="Image" name="image" required />
-            <x-forms.input label="Sort Order" name="sort_order" type="number" value="0" />
+            <x-forms.input label="Sort Order" name="sort_order" type="number" value="0" min="0" step="1" />
 
             <div class="flex items-center gap-3 border-t border-gold-300/15 pt-5">
                 <button type="submit" class="btn-royal-add">Add Image</button>
@@ -20,4 +20,8 @@
             </div>
         </form>
     </div>
+
+    @push('scripts')
+        <script src="{{ asset('js/hero-strip-image-validation.js') }}"></script>
+    @endpush
 @endsection

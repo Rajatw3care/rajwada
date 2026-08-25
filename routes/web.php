@@ -20,6 +20,7 @@ use App\Http\Controllers\TickerItemController;
 use App\Http\Controllers\TimelineItemController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\VisionMissionController;
 use App\Http\Controllers\WhyChooseItemController;
 use App\Models\BlogPost;
 use App\Models\ContactMessage;
@@ -72,6 +73,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('about-content', [AboutContentController::class, 'edit'])->name('about.edit');
     Route::put('about-content', [AboutContentController::class, 'update'])->name('about.update');
+    Route::get('vision-mission', [VisionMissionController::class, 'edit'])->name('vision-mission.edit');
+    Route::put('vision-mission', [VisionMissionController::class, 'update'])->name('vision-mission.update');
     Route::resource('timeline-items', TimelineItemController::class)->except(['show']);
     Route::resource('why-choose-items', WhyChooseItemController::class)->except(['show']);
     Route::resource('partners', PartnerController::class)->except(['show']);

@@ -16,7 +16,7 @@
                             </p>
                         </div>
                         <div>
-                            <form method="POST" action="{{ route('login') }}">
+                            <form id="signinForm" method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="space-y-5">
                                     <!-- Email -->
@@ -36,7 +36,7 @@
                                             Password<span class="text-error-500">*</span>
                                         </label>
                                         <div x-data="{ showPassword: false }" class="relative">
-                                            <input :type="showPassword ? 'text' : 'password'" name="password"
+                                            <input :type="showPassword ? 'text' : 'password'" id="password" name="password"
                                                 placeholder="Enter your password"
                                                 class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent py-2.5 pr-11 pl-4 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('password') border-error-500 @enderror" />
                                             <span @click="showPassword = !showPassword"
@@ -76,9 +76,10 @@
                                             </label>
                                         </div>
                                         @if (Route::has('password.request'))
+                                            <!--
                                             <a href="{{ route('password.request') }}" class="text-brand-500 hover:text-brand-600 dark:text-brand-400 text-sm">
                                                 Forgot password?
-                                            </a>
+                                            </a> -->
                                         @endif
                                     </div>
                                     <!-- Button -->
@@ -90,12 +91,13 @@
                                     </div>
                                 </div>
                             </form>
+                            <!--
                             <div class="mt-5">
                                 <p class="text-center text-sm font-normal text-gray-700 sm:text-start dark:text-gray-400">
                                     Don't have an account?
                                     <a href="{{ route('register') }}" class="text-brand-500 hover:text-brand-600 dark:text-brand-400">Sign Up</a>
                                 </p>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -133,3 +135,32 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(function() {
+            $('#signinForm').validate({
+                rules: {
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6
+                    }
+                },
+                messages: {
+                    email: {
+                        required: 'Please enter your email',
+                        email: 'Please enter a valid email address'
+                    },
+                    password: {
+                        required: 'Please enter your password',
+                        minlength: 'Password must be at least 6 characters'
+                    }
+                }
+            });
+        });
+    </script>
+@endpush

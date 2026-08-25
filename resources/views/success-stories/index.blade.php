@@ -11,7 +11,14 @@
             this.modalHtml = '';
             fetch(url + (url.includes('?') ? '&' : '?') + 'modal=1', { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
                 .then(r => r.text())
-                .then(html => { this.modalHtml = html; this.modalLoading = false; })
+                .then(html => {
+                    this.modalHtml = html;
+                    this.modalLoading = false;
+                    // The modal's HTML is injected via x-html, so <script> tags in it
+                    // never execute — call the validation setup manually once the
+                    // form is actually in the DOM.
+                    this.$nextTick(() => { if (window.setupSuccessStoryFormValidation) window.setupSuccessStoryFormValidation(); });
+                })
                 .catch(() => { this.modalLoading = false; this.modalHtml = '<p class=&quot;p-6 text-red-600&quot;>Failed to load form.</p>'; });
         }
     }">
@@ -68,4 +75,8 @@
 
         <x-ui.crud-modal />
     </div>
+
+    @push('scripts')
+        <script src="{{ asset('js/success-story-validation.js') }}"></script>
+    @endpush
 @endsection

@@ -843,7 +843,8 @@
      stroke: none;
    }
    
-   .contact-item span:last-child {
+   .contact-item span:last-child,
+   .contact-item a {
      white-space: nowrap;
    }
    

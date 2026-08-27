@@ -65,3 +65,15 @@ $.validator.addMethod('maxTags', function(value, element, param) {
     var count = value.split(',').map(function(t) { return t.trim(); }).filter(Boolean).length;
     return this.optional(element) || count <= param;
 }, $.validator.format('Please add no more than {0} values.'));
+
+/**
+ * URL check for share-icon link fields. jQuery Validate's built-in "url"
+ * method requires a "://" after the scheme, which rejects mailto: links
+ * (e.g. "mailto:me@example.com") — those are valid here, so accept them
+ * alongside ordinary http(s) URLs. Mirrors the server's regex rule.
+ */
+$.validator.addMethod('shareUrl', function(value, element) {
+    return this.optional(element)
+        || /^https?:\/\/[^\s]+$/i.test(value)
+        || /^mailto:[^\s@]+@[^\s@]+\.[^\s@]+$/i.test(value);
+}, 'Please enter a valid URL (starting with http://, https://, or mailto:).');

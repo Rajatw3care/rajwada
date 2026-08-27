@@ -10,6 +10,7 @@ class BlogPost extends Model
     protected $fillable = [
         'title', 'slug', 'image', 'venue', 'excerpt', 'body', 'category', 'tags',
         'sort_order', 'is_active', 'is_featured', 'published_at',
+        'share_facebook_url', 'share_twitter_url', 'share_whatsapp_url', 'share_email_url',
     ];
 
     protected $casts = [

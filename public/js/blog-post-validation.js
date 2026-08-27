@@ -18,11 +18,12 @@ window.setupBlogPostFormValidation = function() {
         // `ignore: ':hidden'` default would skip them, so override here.
         ignore: [],
         rules: {
-            // `required: true` here (rather than relying on x-forms.file's
-            // conditional native attribute) makes Image mandatory on every
-            // save — create AND edit — even when one is already uploaded.
+            // No explicit `required` here — x-forms.file already renders the
+            // native `required` attribute conditionally (only when there's
+            // no current image), and jQuery Validate picks that up on its
+            // own. That way Image stays mandatory on create, but editing a
+            // post that already has one doesn't force a re-upload.
             image: {
-                required: true,
                 imageType: true
             },
             title: {
@@ -50,6 +51,18 @@ window.setupBlogPostFormValidation = function() {
             sort_order: {
                 digits: true, // whole numbers only, blocks "-"
                 min: 0
+            },
+            share_facebook_url: {
+                shareUrl: true
+            },
+            share_twitter_url: {
+                shareUrl: true
+            },
+            share_whatsapp_url: {
+                shareUrl: true
+            },
+            share_email_url: {
+                email: true
             }
         },
         messages: {
@@ -60,7 +73,11 @@ window.setupBlogPostFormValidation = function() {
             body: { richTextRequired: 'Body is required' },
             category: { required: 'Category is required', notBlank: 'Category cannot be blank spaces' },
             tags: { maxTags: 'Please add no more than 5 tags' },
-            sort_order: { digits: 'Display Order must be a whole number', min: 'Display Order cannot be negative' }
+            sort_order: { digits: 'Display Order must be a whole number', min: 'Display Order cannot be negative' },
+            share_facebook_url: { shareUrl: 'Enter a valid URL (starting with http://, https://, or mailto:)' },
+            share_twitter_url: { shareUrl: 'Enter a valid URL (starting with http://, https://, or mailto:)' },
+            share_whatsapp_url: { shareUrl: 'Enter a valid URL (starting with http://, https://, or mailto:)' },
+            share_email_url: { email: 'Enter a valid email address' }
         }
     });
 };

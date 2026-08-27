@@ -43,7 +43,7 @@
                     <path d="M6.6 2.5 9 2c.5-.1 1 .2 1.2.7l1.2 3c.2.5.1 1-.3 1.3L9.7 8.3a15.8 15.8 0 0 0 6 6l1.3-1.4c.4-.4.9-.5 1.3-.3l3 1.2c.5.2.8.7.7 1.2l-.5 2.4c-.1.6-.6 1-1.2 1C10.5 18.4 5.6 13.5 5.6 6c0-.6.4-1.1 1-1.2Z"/>
                 </svg>
             </span>
-            <span>{{ $settings['phone'] }}</span>
+            <a href="tel:{{ preg_replace('/\s+/', '', $settings['phone']) }}">{{ $settings['phone'] }}</a>
         </div>
         @endif
 
@@ -55,7 +55,7 @@
                     <path d="m3 6 9 7 9-7"/>
                 </svg>
             </span>
-            <span>{{ $settings['email'] }}</span>
+            <a href="mailto:{{ $settings['email'] }}">{{ $settings['email'] }}</a>
         </div>
         @endif
 

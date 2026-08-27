@@ -16,6 +16,7 @@ class SettingController extends Controller
         'collaboration_email', 'careers_email', 'footer_copyright',
         'office_hours', 'map_embed_url',
         'social_instagram', 'social_facebook', 'social_youtube', 'social_pinterest',
+        'share_facebook', 'share_twitter', 'share_whatsapp', 'share_email',
     ];
 
     public function edit()
@@ -51,6 +52,10 @@ class SettingController extends Controller
             $validated['logo'] = $this->storeImage($request->file('logo'), 'site', Setting::get('logo'));
         } else {
             unset($validated['logo']);
+        }
+
+        foreach (['share_facebook', 'share_twitter', 'share_whatsapp', 'share_email'] as $shareKey) {
+            $validated[$shareKey] = $request->boolean($shareKey) ? '1' : '0';
         }
 
         foreach ($validated as $key => $value) {

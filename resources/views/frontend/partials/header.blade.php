@@ -16,7 +16,7 @@
         <li><a href="{{ route('home') }}" @if(($active ?? 'home') === 'home') aria-current="page" @endif>Home</a></li>
         <li><a href="{{ route('about') }}" @if(($active ?? '') === 'about') aria-current="page" @endif>About Us</a></li>
         <li><a href="{{ route('gallery') }}" @if(($active ?? '') === 'gallery') aria-current="page" @endif>Gallery</a></li>
-        <li><a href="{{ route('services') }}" @if(($active ?? '') === 'services') aria-current="page" @endif>What We Do</a></li>
+        <li><a href="{{ route('services') }}" @if(($active ?? '') === 'services') aria-current="page" @endif>Wedding Services</a></li>
         <li><a href="{{ route('blogs') }}" @if(($active ?? '') === 'blogs') aria-current="page" @endif>Blogs</a></li>
         <li><a href="{{ route('success-story') }}" @if(($active ?? '') === 'success-story') aria-current="page" @endif>Stories</a></li>
         <li><a href="{{ route('testimonials') }}" @if(($active ?? '') === 'testimonials') aria-current="page" @endif>Testimonials</a></li>

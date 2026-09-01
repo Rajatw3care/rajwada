@@ -69,21 +69,37 @@
             </div>
           @endif
 
+          @php
+            $showFacebookShare = ($settings['share_facebook'] ?? '1') !== '0' && filled($blogPost->share_facebook_url);
+            $showTwitterShare = ($settings['share_twitter'] ?? '1') !== '0' && filled($blogPost->share_twitter_url);
+            $showWhatsappShare = ($settings['share_whatsapp'] ?? '1') !== '0' && filled($blogPost->share_whatsapp_url);
+            $showEmailShare = ($settings['share_email'] ?? '1') !== '0' && filled($blogPost->share_email_url);
+          @endphp
+          @if ($showFacebookShare || $showTwitterShare || $showWhatsappShare || $showEmailShare)
           <div class="share-row" aria-label="Share this article">
             <span class="label">Share:</span>
-            <a class="share-icon" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank" rel="noopener" aria-label="Share on Facebook">
+            @if ($showFacebookShare)
+            <a class="share-icon" href="{{ $blogPost->share_facebook_url }}" target="_blank" rel="noopener" aria-label="Share on Facebook">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.6h2.6l.4-3H13.5V8.4c0-.87.24-1.46 1.5-1.46h1.6V4.24C16.3 4.17 15.4 4.1 14.35 4.1c-2.2 0-3.7 1.34-3.7 3.8v2.5H8v3h2.65V21h2.85Z"/></svg>
             </a>
-            <a class="share-icon" href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}" target="_blank" rel="noopener" aria-label="Share on X / Twitter">
+            @endif
+            @if ($showTwitterShare)
+            <a class="share-icon" href="{{ $blogPost->share_twitter_url }}" target="_blank" rel="noopener" aria-label="Share on X / Twitter">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 3H21l-6.6 7.5L22 21h-6.2l-4.9-6.4L5.3 21H3.2l7-8-7.8-10h6.4l4.4 5.9L18.9 3Zm-1.1 16.2h1.2L7.3 4.7H6l11.8 14.5Z"/></svg>
             </a>
-            <a class="share-icon" href="https://api.whatsapp.com/send?text={{ urlencode(url()->current()) }}" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+            @endif
+            @if ($showWhatsappShare)
+            <a class="share-icon" href="{{ $blogPost->share_whatsapp_url }}" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.6 2 2.16 6.45 2.16 11.9c0 1.83.5 3.53 1.36 5l-1.4 4.15 4.3-1.36a9.9 9.9 0 0 0 5.62 1.75c5.44 0 9.87-4.45 9.87-9.9 0-2.65-1.03-5.13-2.9-7A9.83 9.83 0 0 0 12.04 2Zm5.75 14.02c-.24.68-1.4 1.3-1.94 1.35-.5.06-1.03.28-3.5-.73-2.95-1.22-4.85-4.2-5-4.4-.14-.19-1.2-1.6-1.2-3.04 0-1.45.75-2.16 1.02-2.46.27-.3.58-.36.78-.36l.55.01c.18 0 .4-.03.63.48.24.53.8 1.85.87 1.98.07.14.12.3.02.48-.1.2-.15.31-.3.48l-.44.5c-.14.15-.3.31-.13.6.17.3.77 1.28 1.66 2.07 1.14 1.02 2.1 1.34 2.4 1.5.3.13.47.11.65-.07.17-.18.74-.86.94-1.16.2-.3.4-.24.66-.14.28.1 1.76.83 2.06.98.3.15.5.22.57.35.08.13.08.75-.17 1.43Z"/></svg>
             </a>
-            <a class="share-icon" href="mailto:?subject={{ urlencode($blogPost->title) }}&body={{ urlencode(url()->current()) }}" aria-label="Share via Email">
+            @endif
+            @if ($showEmailShare)
+            <a class="share-icon" href="mailto:{{ $blogPost->share_email_url }}" aria-label="Share via Email">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3V6Zm0 0 9 6 9-6"/></svg>
             </a>
+            @endif
           </div>
+          @endif
 
           <div class="author-box">
             @if (!empty($settings['logo']))<img src="{{ asset('storage/'.$settings['logo']) }}" alt="{{ $settings['site_name'] ?? 'Rajwada Events' }}">@endif

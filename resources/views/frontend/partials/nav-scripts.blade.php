@@ -32,9 +32,21 @@
   if (form) {
     var fields = form.querySelectorAll('.field input, .field textarea');
 
+    /* native minlength/required checks treat whitespace as valid characters
+       (a value of "   " satisfies both), so a required field can be "passed"
+       by typing only spaces — check trimmed content explicitly instead. */
+    var isBlank = function (field) {
+      return field.value.trim().length === 0;
+    };
+
+    var isFieldValid = function (field) {
+      if (field.hasAttribute('required') && isBlank(field)) return false;
+      return field.checkValidity();
+    };
+
     var messageFor = function (field) {
       var label = field.dataset.label || 'This field';
-      if (field.validity.valueMissing) return label + ' is required.';
+      if (field.validity.valueMissing || (field.hasAttribute('required') && isBlank(field))) return label + ' is required.';
       if (field.validity.typeMismatch && field.type === 'email') return 'Please enter a valid email address.';
       if ((field.validity.patternMismatch || field.validity.tooShort) && field.name === 'phone') return 'Enter a valid phone number (digits only, 7–15 digits).';
       if (field.validity.tooShort) return label + ' is too short.';
@@ -88,21 +100,21 @@
 
     fields.forEach(function (field) {
       field.addEventListener('blur', function () {
-        if (!field.checkValidity()) {
+        if (!isFieldValid(field)) {
           showError(field, messageFor(field));
         } else {
           clearError(field);
         }
       });
       field.addEventListener('input', function () {
-        if (field.checkValidity()) clearError(field);
+        if (isFieldValid(field)) clearError(field);
       });
     });
 
     form.addEventListener('submit', function (e) {
       var firstInvalid = null;
       fields.forEach(function (field) {
-        if (!field.checkValidity()) {
+        if (!isFieldValid(field)) {
           showError(field, messageFor(field));
           if (!firstInvalid) firstInvalid = field;
         } else {

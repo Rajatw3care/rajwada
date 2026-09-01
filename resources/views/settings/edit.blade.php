@@ -49,6 +49,14 @@
                     <x-forms.input label="Pinterest URL" name="social_pinterest" :value="$settings['social_pinterest'] ?? ''" />
                 </div>
 
+                <x-ui.section-eyebrow label="Blog Share Buttons" />
+                <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                    <x-forms.checkbox label="Facebook" name="share_facebook" :checked="($settings['share_facebook'] ?? '1') !== '0'" />
+                    <x-forms.checkbox label="X / Twitter" name="share_twitter" :checked="($settings['share_twitter'] ?? '1') !== '0'" />
+                    <x-forms.checkbox label="WhatsApp" name="share_whatsapp" :checked="($settings['share_whatsapp'] ?? '1') !== '0'" />
+                    <x-forms.checkbox label="Email" name="share_email" :checked="($settings['share_email'] ?? '1') !== '0'" />
+                </div>
+
                 <x-ui.section-eyebrow label="Footer" />
                 <x-forms.input label="Footer Copyright Text" name="footer_copyright" :value="$settings['footer_copyright'] ?? ''" />
 

@@ -232,7 +232,8 @@ $(document).ready(function () {
     autoplay: true,
     autoplaySpeed: 5000,
     speed: 700,
-    pauseOnHover: true,
+    pauseOnHover: false,
+    pauseOnFocus: false,
     responsive: [
       { breakpoint: 1200, settings: { slidesToShow: 3 } },
       { breakpoint: 768, settings: { slidesToShow: 1, centerMode: true } },

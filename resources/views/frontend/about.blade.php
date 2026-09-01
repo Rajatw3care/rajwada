@@ -217,7 +217,7 @@
   <!-- ============ WEDDING CEREMONIES & EXPERIENCES ============ -->
   @if ($ceremonies->isNotEmpty())
   <section class="services" id="ceremonies" aria-labelledby="ceremonies-title">
-    <img class="services__mascot" src="{{ asset('assets/mascot.png') }}" alt="" aria-hidden="true" loading="lazy">
+    <img class="services__mascot" src="{{ asset('assets/mascot.webp') }}" alt="" aria-hidden="true" loading="lazy">
     <div class="container">
       <div class="services__head">
         <h2 class="section-title title-emboss" id="ceremonies-title">Wedding Ceremonies &amp; Experiences</h2>
@@ -239,7 +239,7 @@
       </div>
 
       <div class="center-action">
-        <a class="btn-ornate" href="{{ route('home') }}#contact"><img src="{{ asset('assets/btn-ornate-red.png') }}" alt="" aria-hidden="true">Plan Your Celebration</a>
+        <a class="btn-ornate" href="{{ route('home') }}#contact"><img src="{{ asset('assets/btn-ornate-red.webp') }}" alt="" aria-hidden="true">Plan Your Celebration</a>
       </div>
     </div>
   </section>

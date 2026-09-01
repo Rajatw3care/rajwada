@@ -108,7 +108,7 @@
   <!-- ============ SERVICES ============ -->
   @if ($services->isNotEmpty())
   <section class="services" id="services" aria-labelledby="services-title">
-    <img class="services__mascot" src="{{ asset('assets/mascot.png') }}" alt="" aria-hidden="true" loading="lazy">
+    <img class="services__mascot" src="{{ asset('assets/mascot.webp') }}" alt="" aria-hidden="true" loading="lazy">
     <div class="container">
       <div class="services__head">
         <h2 class="section-title title-emboss" id="services-title">Our Services</h2>
@@ -174,7 +174,7 @@
       </div>
 
       <div class="center-action">
-        <a class="btn-ornate" href="{{ route('blogs') }}"><img src="{{ asset('assets/btn-ornate-red.png') }}" alt="" aria-hidden="true">See More Articles :-</a>
+        <a class="btn-ornate" href="{{ route('blogs') }}"><img src="{{ asset('assets/btn-ornate-red.webp') }}" alt="" aria-hidden="true">See More Articles :-</a>
       </div>
     </div>
   </section>

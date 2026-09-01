@@ -22,7 +22,7 @@
   <!-- ============ HERO BANNER ============ -->
   <section class="page-banner" aria-label="Contact {{ $settings['site_name'] ?? 'Rajwada Events' }}">
     <div class="page-banner__media" aria-hidden="true">
-      <img src="{{ asset('assets/bg-contact.jpg') }}" alt="" loading="eager" fetchpriority="high">
+      <img src="{{ asset('assets/bg-contact.webp') }}" alt="" loading="eager" fetchpriority="high">
     </div>
     <div class="page-banner__overlay" aria-hidden="true"></div>
 

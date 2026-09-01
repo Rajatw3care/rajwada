@@ -137,7 +137,7 @@
       </div>
 
       <div class="center-action">
-        <a class="btn-ornate" href="{{ route('blogs') }}"><img src="{{ asset('assets/btn-ornate-red.png') }}" alt="" aria-hidden="true">See More Articles</a>
+        <a class="btn-ornate" href="{{ route('blogs') }}"><img src="{{ asset('assets/btn-ornate-red.webp') }}" alt="" aria-hidden="true">See More Articles</a>
       </div>
     </div>
   </section>

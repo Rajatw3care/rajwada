@@ -27,7 +27,7 @@
 
         <!-- Welcome banner -->
         <div class="relative isolate overflow-hidden rounded-2xl shadow-theme-lg">
-            <div class="absolute inset-0 bg-[url('/assets/bg-contact.jpg')] bg-cover bg-[center_35%]"></div>
+            <div class="absolute inset-0 bg-[url('/assets/bg-contact.webp')] bg-cover bg-[center_35%]"></div>
             <div class="absolute inset-0 bg-gradient-to-r from-brand-950/90 via-brand-900/75 to-brand-950/35"></div>
             <div class="relative px-6 py-8 md:px-10 md:py-12">
                 <p class="text-theme-xs uppercase tracking-[0.2em] text-gold-300/80">Rajwada Events Admin</p>

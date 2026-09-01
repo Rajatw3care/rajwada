@@ -59,7 +59,7 @@
     @mouseleave="$store.sidebar.setHovered(false)">
 
     <!-- Royal background: palace/wedding stage image + maroon overlay -->
-    <div class="pointer-events-none absolute inset-0 bg-[url('/assets/bg-footer.jpg')] bg-cover bg-left-top"></div>
+    <div class="pointer-events-none absolute inset-0 bg-[url('/assets/bg-footer.webp')] bg-cover bg-left-top"></div>
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand-950/75 via-brand-950/55 to-brand-950/85"></div>
 
     <!-- Logo Section -->

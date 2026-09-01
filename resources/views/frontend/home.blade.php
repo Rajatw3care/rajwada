@@ -135,123 +135,180 @@
 
   <!-- ============ GALLERY ============ -->
   @if ($galleryImages->isNotEmpty())
-    <section class="gallery" id="gallery" aria-labelledby="gallery-title">
-        <div class="container">
 
-            <h2 class="section-title section-title--cursive title-cream" id="gallery-title">
-                Gallery
-            </h2>
+<section class="gallery" id="gallery" aria-labelledby="gallery-title">
+    <div class="container">
 
-            <img
-                class="ornament"
-                src="{{ asset('assets/ornament-light.svg') }}"
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-            >
+        <h2 class="section-title section-title--cursive title-cream" id="gallery-title">
+            Gallery
+        </h2>
 
-            <p class="section-lead section-lead--light">
-                A glimpse into the unforgettable celebrations we have crafted,
-                where every detail tells a story.
-            </p>
+        <img
+            class="ornament"
+            src="{{ asset('assets/ornament-light.svg') }}"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+        >
+
+        <p class="section-lead section-lead--light">
+            A glimpse into the unforgettable celebrations we have crafted,
+            where every detail tells a story.
+        </p>
 
 
-            {{-- ================= DESKTOP GALLERY ================= --}}
-            <div class="gallery__grid_scroll hide-mobile">
+        {{-- =========================================================
+             DESKTOP GALLERY - EXACTLY 4 COLUMNS
+        ========================================================== --}}
 
-                @php
-                    // 4 columns ke liye images distribute karenge
-                    $desktopColumns = array_chunk($galleryImages->all(), 2);
-                @endphp
+        @php
+            $images = $galleryImages->values();
 
-                @foreach ($desktopColumns as $columnIndex => $columnImages)
+            $desktopColumns = [
+                collect(),
+                collect(),
+                collect(),
+                collect(),
+            ];
+
+            foreach ($images as $index => $image) {
+                $desktopColumns[$index % 4]->push($image);
+            }
+        @endphp
+
+
+        <div class="gallery__grid_scroll hide-mobile">
+
+            @foreach ($desktopColumns as $columnIndex => $columnImages)
+
+                @if ($columnImages->isNotEmpty())
+
                     <div class="gallery-column">
 
-                        <div class="gallery-track {{ $columnIndex % 2 == 0 ? 'scroll-up' : 'scroll-down' }}">
+                        <div class="gallery-track {{ $columnIndex % 2 === 0 ? 'scroll-up' : 'scroll-down' }}">
 
-                            @foreach ($columnImages as $imageIndex => $image)
-
-                                @php
-                                    // Har column ki first/second image ka size
-                                    $isSmall = $imageIndex % 2 == 1;
-                                @endphp
-
-                                <figure class="{{ $isSmall ? 'small-thumb' : '' }}">
-                                    <img
-                                        src="{{ asset('storage/' . $image->image) }}"
-                                        alt="{{ $image->alt_text ?? 'Gallery image' }}"
-                                        loading="lazy"
-                                    >
-                                </figure>
-
-                            @endforeach
-
-                        </div>
-                    </div>
-                @endforeach
-
-            </div>
-
-
-            {{-- ================= MOBILE GALLERY ================= --}}
-            <div class="gallery__grid_scroll hide">
-
-                @php
-                    // Mobile mein 3 columns
-                    $mobileColumns = [
-                        $galleryImages->values()->filter(fn($image, $index) => $index % 3 === 0),
-                        $galleryImages->values()->filter(fn($image, $index) => $index % 3 === 1),
-                        $galleryImages->values()->filter(fn($image, $index) => $index % 3 === 2),
-                    ];
-                @endphp
-
-                @foreach ($mobileColumns as $columnIndex => $columnImages)
-
-                    @if ($columnImages->isNotEmpty())
-                        <div class="gallery-column">
-
-                            <div class="gallery-track {{ $columnIndex % 2 == 0 ? 'scroll-up' : 'scroll-down' }}">
-
+                            {{-- Rendered twice (real set + aria-hidden duplicate) so the
+                                 scrollUp/scrollDown keyframes (0% -> translateY(-50%) and back)
+                                 always land on an identical duplicate frame — no visible jump. --}}
+                            @foreach ([false, true] as $isDuplicateSet)
                                 @foreach ($columnImages as $imageIndex => $image)
 
                                     @php
-                                        $isSmall = $imageIndex % 2 == 1;
+                                        /*
+                                         * Column 1: Big, Small, Big, Small...
+                                         * Column 2: Small, Big, Small, Big...
+                                         * Column 3: Big, Small, Big, Small...
+                                         * Column 4: Small, Big, Small, Big...
+                                         */
+                                        $isSmall = (($columnIndex + $imageIndex) % 2 === 1);
                                     @endphp
 
-                                    <figure class="{{ $isSmall ? 'small-thumb' : '' }}">
+                                    <figure class="{{ $isSmall ? 'small-thumb' : '' }}" @if ($isDuplicateSet) aria-hidden="true" @endif>
                                         <img
                                             src="{{ asset('storage/' . $image->image) }}"
-                                            alt="{{ $image->alt_text ?? 'Gallery image' }}"
+                                            alt="{{ $isDuplicateSet ? '' : ($image->alt_text ?? 'Gallery image') }}"
                                             loading="lazy"
                                         >
                                     </figure>
 
                                 @endforeach
+                            @endforeach
 
-                            </div>
                         </div>
-                    @endif
 
-                @endforeach
+                    </div>
 
-            </div>
+                @endif
 
-
-            {{-- ================= VIEW ALL ================= --}}
-            <div class="center-action">
-                <a class="btn-ornate btn-ornate--gold" href="#gallery">
-                    <img
-                        src="{{ asset('assets/btn-ornate-gold.webp') }}"
-                        alt=""
-                        aria-hidden="true"
-                    >
-                    View all
-                </a>
-            </div>
+            @endforeach
 
         </div>
-    </section>
-  @endif
+
+
+        {{-- =========================================================
+             MOBILE GALLERY - EXACTLY 3 COLUMNS
+        ========================================================== --}}
+
+        @php
+            $mobileColumns = [
+                collect(),
+                collect(),
+                collect(),
+            ];
+
+            foreach ($images as $index => $image) {
+                $mobileColumns[$index % 3]->push($image);
+            }
+        @endphp
+
+
+        <div class="gallery__grid_scroll hide">
+
+            @foreach ($mobileColumns as $columnIndex => $columnImages)
+
+                @if ($columnImages->isNotEmpty())
+
+                    <div class="gallery-column">
+
+                        <div class="gallery-track {{ $columnIndex % 2 === 0 ? 'scroll-up' : 'scroll-down' }}">
+
+                            {{-- Rendered twice (real set + aria-hidden duplicate) so the
+                                 scrollUp/scrollDown keyframes (0% -> translateY(-50%) and back)
+                                 always land on an identical duplicate frame — no visible jump. --}}
+                            @foreach ([false, true] as $isDuplicateSet)
+                                @foreach ($columnImages as $imageIndex => $image)
+
+                                    @php
+                                        /*
+                                         * Mobile pattern:
+                                         * Column 1: Big, Small, Big, Small...
+                                         * Column 2: Small, Big, Small, Big...
+                                         * Column 3: Big, Small, Big, Small...
+                                         */
+                                        $isSmall = (($columnIndex + $imageIndex) % 2 === 1);
+                                    @endphp
+
+                                    <figure class="{{ $isSmall ? 'small-thumb' : '' }}" @if ($isDuplicateSet) aria-hidden="true" @endif>
+                                        <img
+                                            src="{{ asset('storage/' . $image->image) }}"
+                                            alt="{{ $isDuplicateSet ? '' : ($image->alt_text ?? 'Gallery image') }}"
+                                            loading="lazy"
+                                        >
+                                    </figure>
+
+                                @endforeach
+                            @endforeach
+
+                        </div>
+
+                    </div>
+
+                @endif
+
+            @endforeach
+
+        </div>
+
+
+        {{-- =========================================================
+             VIEW ALL
+        ========================================================== --}}
+
+        <div class="center-action">
+            <a class="btn-ornate btn-ornate--gold" href="#gallery">
+                <img
+                    src="{{ asset('assets/btn-ornate-gold.webp') }}"
+                    alt=""
+                    aria-hidden="true"
+                >
+                View all
+            </a>
+        </div>
+
+    </div>
+</section>
+
+@endif
 
 
 

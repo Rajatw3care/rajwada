@@ -67,7 +67,7 @@
       <ul>
         <li><a href="{{ route('gallery') }}">Gallery</a></li>
         <li><a href="{{ route('services') }}">Our services</a></li>
-        <li><a href="{{ route('services') }}">What we do</a></li>
+        <li><a href="{{ route('services') }}">Wedding Services</a></li>
         <li><a href="{{ route('blogs') }}">Blogs</a></li>
         <li><a href="{{ route('success-story') }}">Success story</a></li>
       </ul>

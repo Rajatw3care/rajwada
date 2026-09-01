@@ -132,25 +132,128 @@
   </section>
   @endif
 
+
   <!-- ============ GALLERY ============ -->
   @if ($galleryImages->isNotEmpty())
-  <section class="gallery" id="gallery" aria-labelledby="gallery-title">
-    <div class="container">
-      <h2 class="section-title section-title--cursive title-cream" id="gallery-title">Gallery</h2>
-      <img class="ornament" src="{{ asset('assets/ornament-light.svg') }}" alt="" aria-hidden="true" loading="lazy">
-      <p class="section-lead section-lead--light">A glimpse into the unforgettable celebrations we have crafted, where every detail tells a story.</p>
+    <section class="gallery" id="gallery" aria-labelledby="gallery-title">
+        <div class="container">
 
-      @php
-        $galleryPositionClasses = ['g1', 'g2 small-thumb', 'g3', 'g4 small-thumb', 'g5', 'g6', 'g7 small-thumb', 'g8 small-thumb'];
-      @endphp
-      <div class="gallery__grid">
-        @foreach ($galleryImages as $index => $image)
-          <figure class="{{ $galleryPositionClasses[$index % 8] }}"><img src="{{ asset('storage/'.$image->image) }}" alt="{{ $image->alt_text }}" loading="lazy"></figure>
-        @endforeach
-      </div>
-    </div>
-  </section>
+            <h2 class="section-title section-title--cursive title-cream" id="gallery-title">
+                Gallery
+            </h2>
+
+            <img
+                class="ornament"
+                src="{{ asset('assets/ornament-light.svg') }}"
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+            >
+
+            <p class="section-lead section-lead--light">
+                A glimpse into the unforgettable celebrations we have crafted,
+                where every detail tells a story.
+            </p>
+
+
+            {{-- ================= DESKTOP GALLERY ================= --}}
+            <div class="gallery__grid_scroll hide-mobile">
+
+                @php
+                    // 4 columns ke liye images distribute karenge
+                    $desktopColumns = array_chunk($galleryImages->all(), 2);
+                @endphp
+
+                @foreach ($desktopColumns as $columnIndex => $columnImages)
+                    <div class="gallery-column">
+
+                        <div class="gallery-track {{ $columnIndex % 2 == 0 ? 'scroll-up' : 'scroll-down' }}">
+
+                            @foreach ($columnImages as $imageIndex => $image)
+
+                                @php
+                                    // Har column ki first/second image ka size
+                                    $isSmall = $imageIndex % 2 == 1;
+                                @endphp
+
+                                <figure class="{{ $isSmall ? 'small-thumb' : '' }}">
+                                    <img
+                                        src="{{ asset('storage/' . $image->image) }}"
+                                        alt="{{ $image->alt_text ?? 'Gallery image' }}"
+                                        loading="lazy"
+                                    >
+                                </figure>
+
+                            @endforeach
+
+                        </div>
+                    </div>
+                @endforeach
+
+            </div>
+
+
+            {{-- ================= MOBILE GALLERY ================= --}}
+            <div class="gallery__grid_scroll hide">
+
+                @php
+                    // Mobile mein 3 columns
+                    $mobileColumns = [
+                        $galleryImages->values()->filter(fn($image, $index) => $index % 3 === 0),
+                        $galleryImages->values()->filter(fn($image, $index) => $index % 3 === 1),
+                        $galleryImages->values()->filter(fn($image, $index) => $index % 3 === 2),
+                    ];
+                @endphp
+
+                @foreach ($mobileColumns as $columnIndex => $columnImages)
+
+                    @if ($columnImages->isNotEmpty())
+                        <div class="gallery-column">
+
+                            <div class="gallery-track {{ $columnIndex % 2 == 0 ? 'scroll-up' : 'scroll-down' }}">
+
+                                @foreach ($columnImages as $imageIndex => $image)
+
+                                    @php
+                                        $isSmall = $imageIndex % 2 == 1;
+                                    @endphp
+
+                                    <figure class="{{ $isSmall ? 'small-thumb' : '' }}">
+                                        <img
+                                            src="{{ asset('storage/' . $image->image) }}"
+                                            alt="{{ $image->alt_text ?? 'Gallery image' }}"
+                                            loading="lazy"
+                                        >
+                                    </figure>
+
+                                @endforeach
+
+                            </div>
+                        </div>
+                    @endif
+
+                @endforeach
+
+            </div>
+
+
+            {{-- ================= VIEW ALL ================= --}}
+            <div class="center-action">
+                <a class="btn-ornate btn-ornate--gold" href="#gallery">
+                    <img
+                        src="{{ asset('assets/btn-ornate-gold.webp') }}"
+                        alt=""
+                        aria-hidden="true"
+                    >
+                    View all
+                </a>
+            </div>
+
+        </div>
+    </section>
   @endif
+
+
 
   <!-- ============ BLOGS & STORIES ============ -->
   @if ($blogPosts->isNotEmpty())
@@ -256,27 +359,27 @@
       <!-- TESTIMONIAL SLIDER -->
       <div class="testi__track">
         @foreach ($testimonials as $testimonial)
-        <div class="testi-card-item">
-        <figure class="testi-card">
+          <div class="testi-card-item">
+            <figure class="testi-card">
 
-          <svg class="testi-card__quote" viewBox="0 0 48 40" aria-hidden="true">
-            <path d="M0 40C0 18 8 4 22 0l4 9C17 13 12 20 12 28h10v12zm26 0c0-22 8-36 22-40l4 9c-9 4-14 11-14 19h10v12z"/>
-          </svg>
+              <svg class="testi-card__quote" viewBox="0 0 48 40" aria-hidden="true">
+                <path d="M0 40C0 18 8 4 22 0l4 9C17 13 12 20 12 28h10v12zm26 0c0-22 8-36 22-40l4 9c-9 4-14 11-14 19h10v12z"/>
+              </svg>
 
-          <div class="testi-card__avatar">
-            @if ($testimonial->avatar)
-              <img src="{{ asset('storage/'.$testimonial->avatar) }}" alt="Portrait of {{ $testimonial->name }}" loading="lazy">
-            @endif
+              <div class="testi-card__avatar">
+                @if ($testimonial->avatar)
+                  <img src="{{ asset('storage/'.$testimonial->avatar) }}" alt="Portrait of {{ $testimonial->name }}" loading="lazy">
+                @endif
+              </div>
+
+              <figcaption>
+                <h3>{{ $testimonial->name }}</h3>
+              </figcaption>
+
+              <p>{{ $testimonial->message }}</p>
+
+            </figure>
           </div>
-
-          <figcaption>
-            <h3>{{ $testimonial->name }}</h3>
-          </figcaption>
-
-          <p>{{ $testimonial->message }}</p>
-
-        </figure>
-        </div>
         @endforeach
       </div>
 

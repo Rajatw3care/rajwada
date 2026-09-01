@@ -411,7 +411,8 @@ $('.testi__track').slick({
   autoplay: true,
   autoplaySpeed: 5000,
   speed: 700,
-  pauseOnHover: true,
+  pauseOnHover: false,
+  pauseOnFocus: false,
 
   responsive: [
     { breakpoint: 1200, settings: { slidesToShow: 3 } },

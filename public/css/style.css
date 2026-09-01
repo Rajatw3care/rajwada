@@ -2508,7 +2508,7 @@
 .gallery-track figure:hover {
   border-color: #fff;
 }
-.gallery-track figure:nth-child(2n+2) {
+.gallery-track figure.small-thumb {
 	border: none;
 }
 /* Tall figure — default */

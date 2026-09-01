@@ -22,7 +22,7 @@
   <!-- ============ PAGE BANNER ============ -->
   <section class="page-banner" aria-label="{{ $settings['site_name'] ?? 'Rajwada Events' }} Blogs &amp; Stories">
     <div class="page-banner__media" aria-hidden="true">
-      <img src="{{ asset('assets/hero-lake.jpg') }}" alt="" loading="eager" fetchpriority="high">
+      <img src="{{ asset('assets/hero-lake.webp') }}" alt="" loading="eager" fetchpriority="high">
     </div>
     <div class="page-banner__overlay" aria-hidden="true"></div>
 

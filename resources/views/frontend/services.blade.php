@@ -23,7 +23,7 @@
   <!-- ============ PAGE BANNER ============ -->
   <section class="page-banner" aria-label="{{ $settings['site_name'] ?? 'Rajwada Events' }} Services">
     <div class="page-banner__media" aria-hidden="true">
-      <img src="{{ asset('assets/gallery-6.jpg') }}" alt="" loading="eager" fetchpriority="high">
+      <img src="{{ asset('assets/gallery-6.webp') }}" alt="" loading="eager" fetchpriority="high">
     </div>
     <div class="page-banner__overlay" aria-hidden="true"></div>
 
@@ -41,7 +41,7 @@
   <!-- ============ SERVICE LISTING ============ -->
   @if ($services->isNotEmpty())
   <section class="services" id="service-listing" aria-labelledby="service-listing-title">
-    <img class="services__mascot" src="{{ asset('assets/mascot.png') }}" alt="" aria-hidden="true" loading="lazy">
+    <img class="services__mascot" src="{{ asset('assets/mascot.webp') }}" alt="" aria-hidden="true" loading="lazy">
     <div class="container">
       <div class="services__head">
         <h2 class="section-title title-emboss" id="service-listing-title">Service Listing</h2>

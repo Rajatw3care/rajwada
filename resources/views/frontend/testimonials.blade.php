@@ -23,7 +23,7 @@
   <!-- ============ PAGE BANNER ============ -->
   <section class="page-banner" aria-label="{{ $settings['site_name'] ?? 'Rajwada Events' }} Testimonials">
     <div class="page-banner__media" aria-hidden="true">
-      <img src="{{ asset('assets/hero-lake.jpg') }}" alt="" loading="eager" fetchpriority="high">
+      <img src="{{ asset('assets/hero-lake.webp') }}" alt="" loading="eager" fetchpriority="high">
     </div>
     <div class="page-banner__overlay" aria-hidden="true"></div>
 
@@ -134,7 +134,7 @@
       <h2 id="cta-title">Ready to write your own story with us? Let&rsquo;s start planning your special celebration.</h2>
       <img class="ornament" src="{{ asset('assets/ornament-light.svg') }}" alt="" aria-hidden="true" loading="lazy">
       <div class="center-action">
-        <a class="btn-ornate btn-ornate--gold" href="{{ route('contact') }}"><img src="{{ asset('assets/btn-ornate-gold.png') }}" alt="" aria-hidden="true">Enquire Now</a>
+        <a class="btn-ornate btn-ornate--gold" href="{{ route('contact') }}"><img src="{{ asset('assets/btn-ornate-gold.webp') }}" alt="" aria-hidden="true">Enquire Now</a>
       </div>
     </div>
   </section>

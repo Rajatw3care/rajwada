@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Concerns;
 
+use App\Services\ImageOptimizer;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 trait HandlesImageUploads
 {
@@ -13,6 +15,17 @@ trait HandlesImageUploads
             Storage::disk('public')->delete($oldPath);
         }
 
-        return $file->store($directory, 'public');
+        $directory = trim($directory, '/');
+
+        // SVGs are already tiny/vector — keep them as-is instead of rasterizing.
+        if ($file->getClientMimeType() === 'image/svg+xml' || strtolower($file->getClientOriginalExtension()) === 'svg') {
+            return $file->store($directory, 'public');
+        }
+
+        $relativePath = $directory.'/'.Str::random(40).'.webp';
+
+        ImageOptimizer::toWebp($file->getRealPath(), Storage::disk('public')->path($relativePath));
+
+        return $relativePath;
     }
 }

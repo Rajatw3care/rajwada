@@ -102,7 +102,7 @@
             </div>
 
             <div class="bg-brand-950 relative hidden h-full w-full items-center lg:grid lg:w-1/2 dark:bg-white/5">
-                <div class="absolute inset-0 bg-[url('/assets/hero-lake.jpg')] bg-cover bg-center"></div>
+                <div class="absolute inset-0 bg-[url('/assets/hero-lake.webp')] bg-cover bg-center"></div>
                 <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-brand-950/85 via-brand-950/55 to-brand-950/90"></div>
                 <div class="pointer-events-none absolute inset-6 rounded-2xl border border-gold-300/15"></div>
                 <div class="z-1 flex items-center justify-center">

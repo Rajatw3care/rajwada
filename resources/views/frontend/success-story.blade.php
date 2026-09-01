@@ -23,7 +23,7 @@
   <!-- ============ HERO / PAGE BANNER ============ -->
   <section class="page-banner" aria-label="{{ $settings['site_name'] ?? 'Rajwada Events' }} Success Stories">
     <div class="page-banner__media" aria-hidden="true">
-      <img src="{{ asset('assets/gallery-5.jpg') }}" alt="" loading="eager" fetchpriority="high">
+      <img src="{{ asset('assets/gallery-5.webp') }}" alt="" loading="eager" fetchpriority="high">
     </div>
     <div class="page-banner__overlay" aria-hidden="true"></div>
 
@@ -48,19 +48,19 @@
       <div class="journey-steps">
         <div class="journey-step">
           <span class="journey-step__num">1</span>
-          <div class="journey-step__icon"><img src="{{ asset('assets/icon-planning.png') }}" alt="" loading="lazy"></div>
+          <div class="journey-step__icon"><img src="{{ asset('assets/icon-planning.webp') }}" alt="" loading="lazy"></div>
           <h3>Discovery &amp; Planning</h3>
           <p>We learn your story, set the budget and timeline, and shortlist venues that fit your vision.</p>
         </div>
         <div class="journey-step">
           <span class="journey-step__num">2</span>
-          <div class="journey-step__icon"><img src="{{ asset('assets/icon-favours.png') }}" alt="" loading="lazy"></div>
+          <div class="journey-step__icon"><img src="{{ asset('assets/icon-favours.webp') }}" alt="" loading="lazy"></div>
           <h3>Design &amp; Styling</h3>
           <p>Themes, decor, florals and lighting are curated to bring your celebration's mood to life.</p>
         </div>
         <div class="journey-step">
           <span class="journey-step__num">3</span>
-          <div class="journey-step__icon"><img src="{{ asset('assets/icon-operations.png') }}" alt="" loading="lazy"></div>
+          <div class="journey-step__icon"><img src="{{ asset('assets/icon-operations.webp') }}" alt="" loading="lazy"></div>
           <h3>Event Execution</h3>
           <p>Our team manages every ceremony, vendor and cue on the ground, keeping the day stress-free.</p>
         </div>
@@ -91,7 +91,7 @@
       </div>
 
       <div class="center-action">
-        <a class="btn-ornate btn-ornate--gold" href="{{ route('gallery') }}"><img src="{{ asset('assets/btn-ornate-gold.png') }}" alt="" aria-hidden="true">View all</a>
+        <a class="btn-ornate btn-ornate--gold" href="{{ route('gallery') }}"><img src="{{ asset('assets/btn-ornate-gold.webp') }}" alt="" aria-hidden="true">View all</a>
       </div>
     </div>
   </section>
@@ -157,7 +157,7 @@
       </div>
 
       <div class="center-action">
-        <a class="btn-ornate btn-ornate--gold" href="{{ route('gallery') }}"><img src="{{ asset('assets/btn-ornate-gold.png') }}" alt="" aria-hidden="true">View Full Gallery</a>
+        <a class="btn-ornate btn-ornate--gold" href="{{ route('gallery') }}"><img src="{{ asset('assets/btn-ornate-gold.webp') }}" alt="" aria-hidden="true">View Full Gallery</a>
       </div>
     </div>
   </section>

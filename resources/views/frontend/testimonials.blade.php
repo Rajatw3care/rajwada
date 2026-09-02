@@ -6,6 +6,7 @@
 <title>Testimonials — {{ $settings['site_name'] ?? 'Rajwada Events' }} | {{ $settings['site_tagline'] ?? 'The Royal Creators' }}</title>
 <meta name="description" content="Read genuine client reviews and watch video testimonials from couples and families who trusted {{ $settings['site_name'] ?? 'Rajwada Events' }} to craft their royal weddings.">
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

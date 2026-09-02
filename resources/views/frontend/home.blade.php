@@ -6,6 +6,7 @@
 <title>{{ $settings['site_name'] ?? 'Rajwada Events' }} — {{ $settings['site_tagline'] ?? 'The Royal Creators' }}</title>
 <meta name="description" content="{{ $settings['meta_description'] ?? '' }}">
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

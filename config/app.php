@@ -30,6 +30,22 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Site-wide Basic Auth Gate
+    |--------------------------------------------------------------------------
+    |
+    | While true, every request (except /up) must pass HTTP Basic Auth before
+    | reaching the app — used to keep a pre-launch site private from visitors
+    | and search engines. Set BASIC_AUTH_ENABLED=false in .env to open the
+    | site back up.
+    |
+    */
+
+    'basic_auth_enabled' => env('BASIC_AUTH_ENABLED', false),
+    'basic_auth_username' => env('BASIC_AUTH_USERNAME', 'rajwada'),
+    'basic_auth_password' => env('BASIC_AUTH_PASSWORD'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Debug Mode
     |--------------------------------------------------------------------------
     |

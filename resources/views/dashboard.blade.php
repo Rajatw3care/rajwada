@@ -27,8 +27,12 @@
 
         <!-- Welcome banner -->
         <div class="relative isolate overflow-hidden rounded-2xl shadow-theme-lg">
-            <div class="absolute inset-0 bg-[url('/assets/bg-contact.webp')] bg-cover bg-[center_35%]"></div>
-            <div class="absolute inset-0 bg-gradient-to-r from-brand-950/90 via-brand-900/75 to-brand-950/35"></div>
+            <div class="absolute inset-0 bg-[url('/assets/bg-contact.webp')] bg-cover bg-[center_30%]"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-950/85 via-brand-950/55 to-brand-900/20"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-950/60 via-transparent to-transparent"></div>
+            <img src="{{ asset('assets/ornament-light.svg') }}" alt="" aria-hidden="true"
+                class="pointer-events-none absolute -right-6 -top-8 h-40 w-40 opacity-20 md:h-52 md:w-52">
+            <div class="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gold-300/60 to-transparent"></div>
             <div class="relative px-6 py-8 md:px-10 md:py-12">
                 <p class="text-theme-xs uppercase tracking-[0.2em] text-gold-300/80">Rajwada Events Admin</p>
                 <h2 class="mt-2 font-display text-2xl font-semibold text-white md:text-3xl">

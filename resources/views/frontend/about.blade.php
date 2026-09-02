@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>About Us — {{ $settings['site_name'] ?? 'Rajwada Events' }} | {{ $settings['site_tagline'] ?? 'The Royal Creators' }}</title>
+<title>About Us — {{ $settings['site_name'] ?? 'Rajwada Events' }} | {{ $settings['site_tagline'] ?? 'The Rajwada Creators' }}</title>
 <meta name="description" content="Meet {{ $settings['site_name'] ?? 'Rajwada Events' }} — Jaipur's royal wedding & event curators. Our story, our vision, our team, and the ceremonies we craft with heritage and heart.">
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
@@ -29,7 +29,7 @@
     <div class="page-banner__overlay" aria-hidden="true"></div>
 
     <div class="container page-banner__inner">
-      <p class="page-banner__eyebrow">{{ $settings['site_tagline'] ?? 'The Royal Creators' }}</p>
+      <p class="page-banner__eyebrow">{{ $settings['site_tagline'] ?? 'The Rajwada Creators' }}</p>
       <h1>About Us</h1>
       <img class="ornament" src="{{ asset('assets/ornament-light.svg') }}" alt="" aria-hidden="true" loading="lazy">
       <nav class="breadcrumb" aria-label="Breadcrumb">

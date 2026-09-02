@@ -6,6 +6,7 @@
 <title>Gallery — {{ $settings['site_name'] ?? 'Rajwada Events' }} | {{ $settings['site_tagline'] ?? 'The Royal Creators' }}</title>
 <meta name="description" content="Explore {{ $settings['site_name'] ?? 'Rajwada Events' }}' portfolio of royal weddings, destination celebrations and ceremonies — photo galleries, highlight films and cinematic wedding stories.">
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

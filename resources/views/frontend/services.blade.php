@@ -6,6 +6,7 @@
 <title>Our Services — {{ $settings['site_name'] ?? 'Rajwada Events' }} | {{ $settings['site_tagline'] ?? 'The Royal Creators' }}</title>
 <meta name="description" content="Explore {{ $settings['site_name'] ?? 'Rajwada Events' }}' full range of wedding and event management services — venue booking, planning, entertainment, photography, catering, styling and more.">
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

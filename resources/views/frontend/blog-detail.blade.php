@@ -6,6 +6,7 @@
 <title>{{ $blogPost->title }} — {{ $settings['site_name'] ?? 'Rajwada Events' }}</title>
 <meta name="description" content="{{ $blogPost->excerpt }}">
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

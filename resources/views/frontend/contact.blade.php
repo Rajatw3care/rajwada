@@ -6,6 +6,7 @@
 <title>Contact Us — {{ $settings['site_name'] ?? 'Rajwada Events' }} | {{ $settings['site_tagline'] ?? 'The Royal Creators' }}</title>
 <meta name="description" content="Connect with {{ $settings['site_name'] ?? 'Rajwada Events' }} for wedding and event planning inquiries. Reach us by phone, email or WhatsApp, or send us your event details directly.">
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

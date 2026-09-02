@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Video extends Model
 {
+    use HasFactory;
+
     protected $fillable = ['category', 'thumbnail', 'title', 'tag', 'duration', 'video_url', 'sort_order', 'is_active'];
 
     protected $casts = ['is_active' => 'boolean'];

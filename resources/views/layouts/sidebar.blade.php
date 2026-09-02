@@ -58,9 +58,11 @@
     @mouseenter="if (!$store.sidebar.isExpanded) $store.sidebar.setHovered(true)"
     @mouseleave="$store.sidebar.setHovered(false)">
 
-    <!-- Royal background: palace/wedding stage image + maroon overlay -->
-    <div class="pointer-events-none absolute inset-0 bg-[url('/assets/bg-footer.webp')] bg-cover bg-left-top"></div>
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand-950/75 via-brand-950/55 to-brand-950/85"></div>
+    <!-- Royal background: portrait palace-wall texture (matches the sidebar's tall, narrow shape
+         far better than the old wide banner crop did — this one shows properly, not just a flat corner) -->
+    <div class="pointer-events-none absolute inset-0 bg-[url('/assets/texture-maroon.webp')] bg-cover bg-top opacity-90"></div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand-950/55 via-brand-950/35 to-brand-950/75"></div>
+    <div class="pointer-events-none absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-gold-300/40 to-transparent"></div>
 
     <!-- Logo Section -->
     <div class="relative z-10 flex justify-center border-b border-gold-300/15 pb-5 pt-7">

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ $settings['site_name'] ?? 'Rajwada Events' }} — {{ $settings['site_tagline'] ?? 'The Royal Creators' }}</title>
+<title>{{ $settings['site_name'] ?? 'Rajwada Events' }} — {{ $settings['site_tagline'] ?? 'The Rajwada Creators' }}</title>
 <meta name="description" content="{{ $settings['meta_description'] ?? '' }}">
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">

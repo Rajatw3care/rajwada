@@ -19,7 +19,7 @@ class RajwadaContentSeeder extends Seeder
     {
         $settings = [
             'site_name' => 'Rajwada Events',
-            'site_tagline' => 'The Royal Creators',
+            'site_tagline' => 'The Rajwada Creators',
             'meta_description' => 'Rajwada Events crafts timeless celebrations — luxury weddings and extraordinary events in Jaipur and beyond.',
             'logo' => 'site/logo.png',
             'phone' => '+91 94144 99933',

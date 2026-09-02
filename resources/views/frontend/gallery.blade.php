@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gallery — {{ $settings['site_name'] ?? 'Rajwada Events' }} | {{ $settings['site_tagline'] ?? 'The Royal Creators' }}</title>
+<title>Gallery — {{ $settings['site_name'] ?? 'Rajwada Events' }} | {{ $settings['site_tagline'] ?? 'The Rajwada Creators' }}</title>
 <meta name="description" content="Explore {{ $settings['site_name'] ?? 'Rajwada Events' }}' portfolio of royal weddings, destination celebrations and ceremonies — photo galleries, highlight films and cinematic wedding stories.">
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
@@ -29,7 +29,7 @@
     <div class="page-banner__overlay" aria-hidden="true"></div>
 
     <div class="container page-banner__inner">
-      <p class="page-banner__eyebrow">{{ $settings['site_tagline'] ?? 'The Royal Creators' }}</p>
+      <p class="page-banner__eyebrow">{{ $settings['site_tagline'] ?? 'The Rajwada Creators' }}</p>
       <h1>Gallery</h1>
       <p class="page-intro">A window into every celebration we craft — high-quality images and highlight films from royal weddings, haldi, mehendi, sangeet and reception nights across Rajasthan.</p>
       <img class="ornament" src="{{ asset('assets/ornament-light.svg') }}" alt="" aria-hidden="true" loading="lazy">

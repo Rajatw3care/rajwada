@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Our Services — {{ $settings['site_name'] ?? 'Rajwada Events' }} | {{ $settings['site_tagline'] ?? 'The Royal Creators' }}</title>
+<title>Our Services — {{ $settings['site_name'] ?? 'Rajwada Events' }} | {{ $settings['site_tagline'] ?? 'The Rajwada Creators' }}</title>
 <meta name="description" content="Explore {{ $settings['site_name'] ?? 'Rajwada Events' }}' full range of wedding and event management services — venue booking, planning, entertainment, photography, catering, styling and more.">
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
@@ -29,7 +29,7 @@
     <div class="page-banner__overlay" aria-hidden="true"></div>
 
     <div class="container page-banner__inner">
-      <p class="page-banner__eyebrow">{{ $settings['site_tagline'] ?? 'The Royal Creators' }}</p>
+      <p class="page-banner__eyebrow">{{ $settings['site_tagline'] ?? 'The Rajwada Creators' }}</p>
       <h1>Our Services</h1>
       <p class="page-intro">From the first venue visit to the final farewell, our team designs, plans and manages every requirement of your event with the elegance of Rajasthan's royal heritage and the precision of a seasoned crew.</p>
       <img class="ornament" src="{{ asset('assets/ornament-light.svg') }}" alt="" aria-hidden="true" loading="lazy">

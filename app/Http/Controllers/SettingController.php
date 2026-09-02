@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Concerns\HandlesImageUploads;
+use App\Mail\TestSmtpEmail;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
 
 class SettingController extends Controller
 {
@@ -17,13 +20,19 @@ class SettingController extends Controller
         'office_hours', 'map_embed_url',
         'social_instagram', 'social_facebook', 'social_youtube', 'social_pinterest',
         'share_facebook', 'share_twitter', 'share_whatsapp', 'share_email',
+        'smtp_host', 'smtp_port', 'smtp_username', 'smtp_password', 'smtp_encryption',
+        'mail_from_address', 'mail_from_name',
     ];
 
     public function edit()
     {
         $settings = Setting::pluck('value', 'key');
+        $settings->forget('smtp_password'); // never send the (encrypted) password value back to the browser
 
-        return view('settings.edit', ['settings' => $settings]);
+        return view('settings.edit', [
+            'settings' => $settings,
+            'hasSmtpPassword' => filled(Setting::get('smtp_password')),
+        ]);
     }
 
     public function update(Request $request)
@@ -46,6 +55,13 @@ class SettingController extends Controller
             'social_facebook' => 'nullable|string|max:255',
             'social_youtube' => 'nullable|string|max:255',
             'social_pinterest' => 'nullable|string|max:255',
+            'smtp_host' => 'nullable|string|max:255',
+            'smtp_port' => 'nullable|integer|min:1|max:65535',
+            'smtp_username' => 'nullable|string|max:255',
+            'smtp_password' => 'nullable|string|max:255',
+            'smtp_encryption' => 'nullable|in:tls,ssl,none',
+            'mail_from_address' => 'nullable|email|max:255',
+            'mail_from_name' => 'nullable|string|max:255',
         ]);
 
         if ($request->hasFile('logo')) {
@@ -58,10 +74,32 @@ class SettingController extends Controller
             $validated[$shareKey] = $request->boolean($shareKey) ? '1' : '0';
         }
 
+        // leave the stored (encrypted) password alone unless a new one was typed
+        if (blank($validated['smtp_password'] ?? null)) {
+            unset($validated['smtp_password']);
+        } else {
+            $validated['smtp_password'] = Crypt::encryptString($validated['smtp_password']);
+        }
+
         foreach ($validated as $key => $value) {
             Setting::set($key, $value);
         }
 
         return redirect()->route('settings.edit')->with('success', 'Settings updated successfully');
+    }
+
+    public function sendTestEmail(Request $request)
+    {
+        $validated = $request->validate([
+            'test_email' => 'required|email',
+        ]);
+
+        try {
+            Mail::to($validated['test_email'])->send(new TestSmtpEmail);
+        } catch (\Throwable $e) {
+            return redirect()->route('settings.edit')->with('smtp_error', 'Could not send test email: '.$e->getMessage());
+        }
+
+        return redirect()->route('settings.edit')->with('success', 'Test email sent to '.$validated['test_email'].' — check the inbox (and spam folder).');
     }
 }

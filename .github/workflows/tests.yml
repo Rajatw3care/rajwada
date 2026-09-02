@@ -22,10 +22,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup PHP
-        uses: rajatsharma/setup-php@v2
+        uses: shivammathur/setup-php@v2
         with:
           php-version: 8.4
           tools: composer:v2
+          extensions: mbstring, pdo, pdo_sqlite, gd, xml, bcmath, curl, zip
           coverage: xdebug
 
       - name: Setup Node

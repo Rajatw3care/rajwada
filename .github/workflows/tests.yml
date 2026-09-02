@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - develop
+      - staging
       - main
   pull_request:
     branches:
       - develop
+      - staging
       - main
 
 jobs:
@@ -48,4 +50,26 @@ jobs:
         run: npm run build
 
       - name: Run Tests
-        run: php artisan test
+        run: php artisan test --log-junit=storage/logs/test-report.xml
+
+      - name: Setup Python
+        if: always()
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install report dependencies
+        if: always()
+        run: pip install openpyxl
+
+      - name: Build pass/fail Excel report
+        if: always()
+        run: python .github/scripts/build_test_report.py storage/logs/test-report.xml storage/logs/rajwada-test-report.xlsx "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload Excel report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report-${{ github.run_number }}
+          path: storage/logs/rajwada-test-report.xlsx
+          retention-days: 30

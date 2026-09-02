@@ -2,6 +2,28 @@
 
 /*
 |--------------------------------------------------------------------------
+| Safety guard — deletes a stale config cache before anything else
+|--------------------------------------------------------------------------
+|
+| On 2026-09-02 the test suite was run directly on the live server. A stale
+| bootstrap/cache/config.php made Laravel misreport its own environment,
+| RefreshDatabase's migrate:fresh call went through, and the live database
+| was wiped. The actual per-test guard lives in tests/TestCase.php (it has
+| to run inside a test's setUp(), before parent::setUp(), to catch this
+| ahead of RefreshDatabase — see the comment there). This just removes the
+| stale cache file so config() reflects .env / phpunit.xml again, in case
+| a leftover `php artisan config:cache` on a dev machine ever reintroduces
+| the same failure mode.
+|
+*/
+
+$cachedConfig = __DIR__.'/../bootstrap/cache/config.php';
+if (file_exists($cachedConfig)) {
+    unlink($cachedConfig);
+}
+
+/*
+|--------------------------------------------------------------------------
 | Test Case
 |--------------------------------------------------------------------------
 |

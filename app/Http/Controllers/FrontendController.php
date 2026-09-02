@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewContactEnquiry;
 use App\Models\AboutContent;
 use App\Models\BlogPost;
 use App\Models\Ceremony;
@@ -22,6 +23,7 @@ use App\Models\TimelineItem;
 use App\Models\Video;
 use App\Models\WhyChooseItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class FrontendController extends Controller
 {
@@ -167,7 +169,19 @@ class FrontendController extends Controller
             'message.min' => 'Please add a few more details about your event.',
         ]);
 
-        ContactMessage::create($validated);
+        $contactMessage = ContactMessage::create($validated);
+
+        $notifyAddress = Setting::get('email');
+        if (filled($notifyAddress)) {
+            try {
+                Mail::to($notifyAddress)->send(new NewContactEnquiry($contactMessage));
+            } catch (\Throwable $e) {
+                // the enquiry is already saved either way — never fail the
+                // visitor's submission just because the notification email
+                // couldn't go out (e.g. SMTP not configured yet)
+                report($e);
+            }
+        }
 
         return back()->with('success', 'Thank you — we will be in touch shortly.');
     }

@@ -65,6 +65,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('settings', [SettingController::class, 'edit'])->name('settings.edit');
     Route::put('settings', [SettingController::class, 'update'])->name('settings.update');
+    Route::post('settings/test-email', [SettingController::class, 'sendTestEmail'])->name('settings.test-email');
 
     Route::get('hero', [HeroContentController::class, 'edit'])->name('hero.edit');
     Route::put('hero', [HeroContentController::class, 'update'])->name('hero.update');

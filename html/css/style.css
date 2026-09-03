@@ -360,7 +360,7 @@
       ============================================================ */
    .services{
      position:relative;padding-block:var(--section-pad);
-     background:url("../assets/bg-services.svg") center/cover no-repeat, #e7ddc6;
+     background:url("../assets/bg-services.webp") center/cover no-repeat, #e7ddc6;
      border-top: 6px solid #450503;
    }
    .services__head .section-title{margin-bottom:0;}
@@ -410,13 +410,16 @@
    .btn-ornate{
      position:relative;display:inline-flex;align-items:center;justify-content:center;
      min-width:clamp(150px,17vw,220px);min-height:clamp(38px,4vw,54px);z-index:0;isolation:isolate;
-     padding:30px 34px;background:transparent;border:0;cursor:pointer;
+     padding:30px 34px;background:transparent;border:0;cursor:pointer;overflow:hidden;
      font-size:clamp(12px,1.1vw,15px);font-weight:600;letter-spacing:.05em;
      color:var(--cream);text-shadow:0 1px 3px rgba(0,0,0,.6);
      transition:transform .25s,filter .25s;
          padding-bottom: 35px;
    }
-   .btn-ornate img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;z-index:-1;}
+   /* object-fit:cover keeps the ornate frame artwork's real proportions instead of
+      squashing/stretching it to whatever width the button's text happens to need;
+      overflow:hidden above clips the slight crop this causes to the pill shape. */
+   .btn-ornate img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;}
    .btn-ornate:hover,.btn-ornate:focus-visible{transform:translateY(-2px);filter:brightness(1.12);}
    .btn-ornate--gold{color:#3a2a10;text-shadow:0 1px 0 rgba(255,255,255,.45); color: #fff;
      font-weight: 500;
@@ -2251,7 +2254,7 @@
    
    #related {    position: relative;
      padding-block: var(--section-pad);
-     background: url(../assets/bg-services.svg) center / cover no-repeat, #e7ddc6;
+     background: url(../assets/bg-services.webp) center / cover no-repeat, #e7ddc6;
      border-top: 6px solid #450503;
    }
    

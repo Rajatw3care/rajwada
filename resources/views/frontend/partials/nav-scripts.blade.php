@@ -81,6 +81,9 @@
           e.preventDefault();
         }
       });
+      /* Sanitizes on every 'input' (typing, pasting, or dropping text all fire it),
+         so pasting doesn't need its own handler — blocking paste outright is a
+         Lighthouse best-practices violation and breaks password managers. */
       phoneField.addEventListener('input', function () {
         var cursor = phoneField.selectionStart;
         var before = phoneField.value;
@@ -90,11 +93,6 @@
           phoneField.value = digitsOnly;
           phoneField.setSelectionRange(keptBeforeCursor, keptBeforeCursor);
         }
-      });
-      phoneField.addEventListener('paste', function (e) {
-        e.preventDefault();
-        var text = (e.clipboardData || window.clipboardData).getData('text').replace(/[^0-9]/g, '');
-        document.execCommand('insertText', false, text);
       });
     }
 

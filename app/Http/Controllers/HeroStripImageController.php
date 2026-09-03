@@ -28,7 +28,10 @@ class HeroStripImageController extends Controller
             'image' => 'required|image|max:4096',
             'sort_order' => 'nullable|integer',
         ]);
-        $validated['image'] = $this->storeImage($request->file('image'), 'site/hero');
+        // These are small decorative strip thumbnails (never displayed wider than
+        // ~450px even on retina), so cap them far tighter than the 2000px/285KB
+        // default meant for full-bleed hero backgrounds.
+        $validated['image'] = $this->storeImage($request->file('image'), 'site/hero', maxDimension: 1000, targetBytes: 51200);
 
         HeroStripImage::create($validated);
 

@@ -64,6 +64,13 @@ class ConvertImagesToWebp extends Command
             [WhyChooseItem::class, ['icon']],
         ];
 
+        // Hero strip images are small decorative thumbnails (never displayed
+        // wider than ~450px, even on retina) — cap them far tighter than the
+        // 2000px/285KB default meant for full-bleed hero backgrounds.
+        $tightCaps = [
+            HeroStripImage::class => [1000, 51200],
+        ];
+
         // Pass 1: multiple records can point at the exact same underlying file
         // (e.g. a Service.overview_image reusing a GalleryImage.image path).
         // Convert each unique source file exactly once and remember the mapping,
@@ -74,9 +81,11 @@ class ConvertImagesToWebp extends Command
             $records = $modelClass::all();
             $allRecordsByColumn[] = [$records, $columns];
 
+            [$maxDimension, $targetBytes] = $tightCaps[$modelClass] ?? [2000, 291840];
+
             foreach ($records as $record) {
                 foreach ($columns as $column) {
-                    $this->convertUnique($record->{$column});
+                    $this->convertUnique($record->{$column}, $maxDimension, $targetBytes);
                 }
             }
         }
@@ -115,7 +124,7 @@ class ConvertImagesToWebp extends Command
         return self::SUCCESS;
     }
 
-    protected function convertUnique(?string $path): void
+    protected function convertUnique(?string $path, int $maxDimension = 2000, int $targetBytes = 291840): void
     {
         if (blank($path) || isset($this->converted[$path])) {
             return;
@@ -139,7 +148,7 @@ class ConvertImagesToWebp extends Command
         $newFullPath = Storage::disk('public')->path($newRelativePath);
 
         try {
-            ImageOptimizer::toWebp($fullPath, $newFullPath);
+            ImageOptimizer::toWebp($fullPath, $newFullPath, $maxDimension, $targetBytes);
         } catch (\Throwable $e) {
             $this->failed++;
             $this->warn("Failed: {$path} — {$e->getMessage()}");

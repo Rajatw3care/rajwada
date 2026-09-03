@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 trait HandlesImageUploads
 {
-    protected function storeImage(UploadedFile $file, string $directory, ?string $oldPath = null): string
+    protected function storeImage(UploadedFile $file, string $directory, ?string $oldPath = null, int $maxDimension = 2000, int $targetBytes = 291840): string
     {
         if ($oldPath) {
             Storage::disk('public')->delete($oldPath);
@@ -24,7 +24,7 @@ trait HandlesImageUploads
 
         $relativePath = $directory.'/'.Str::random(40).'.webp';
 
-        ImageOptimizer::toWebp($file->getRealPath(), Storage::disk('public')->path($relativePath));
+        ImageOptimizer::toWebp($file->getRealPath(), Storage::disk('public')->path($relativePath), $maxDimension, $targetBytes);
 
         return $relativePath;
     }

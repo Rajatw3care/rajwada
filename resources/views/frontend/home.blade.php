@@ -10,11 +10,14 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Poppins:wght@300;400;500;600;700&display=swap"></noscript>
 
 <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"></noscript>
 
 </head>
 
@@ -458,7 +461,22 @@
 <script>
  $(document).ready(function () {
 
-$('.testi__track').slick({
+$('.testi__track')
+  /* Slick marks every non-current slide aria-hidden, even the neighbours
+     centerMode is still showing fully on screen — leaving them focusable
+     (tabindex="0") while hidden from assistive tech. Keep tabindex in
+     sync with aria-hidden so hidden slides can't be tabbed into. Deferred
+     one tick: slick's own responsive/breakpoint pass runs right after
+     "init" and resets tabindex, so a same-tick fix gets overwritten. */
+  .on('init afterChange', function () {
+    var track = this;
+    setTimeout(function () {
+      track.querySelectorAll('.slick-slide').forEach(function (slide) {
+        slide.setAttribute('tabindex', slide.getAttribute('aria-hidden') === 'true' ? '-1' : '0');
+      });
+    }, 0);
+  })
+  .slick({
   slidesToShow: 3,
   slidesToScroll: 1,
   centerMode: true,

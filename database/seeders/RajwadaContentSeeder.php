@@ -64,7 +64,7 @@ class RajwadaContentSeeder extends Seeder
             'image_1' => 'site/about/about-2.jpg',
             'image_2' => 'site/about/about-1.jpg',
             'image_3' => 'site/about/about-3.jpg',
-            'badge_image' => 'site/about/10-plus-year.svg',
+            'badge_image' => 'site/about/10-plus-year.webp',
             'cta_label' => 'Explore More',
             'cta_link' => '#services',
         ]);
